@@ -8,8 +8,8 @@ namespace fag_el_gamous.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private MummyContext _context;
-    public HomeController(ILogger<HomeController> logger, MummyContext context)
+    private postgresContext _context;
+    public HomeController(ILogger<HomeController> logger, postgresContext context)
     {
         _logger = logger;
         _context = context;
@@ -17,7 +17,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var test = _context.Teammembers.ToList();
+        return View(test);
     }
 
     public IActionResult Privacy()
