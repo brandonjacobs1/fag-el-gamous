@@ -26,7 +26,7 @@ using (var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoin
 }
 
 
-builder.Services.AddDbContext<MummyContext>(opt =>
+builder.Services.AddDbContext<postgresContext>(opt =>
         opt.UseNpgsql(postgresConnectionString));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
