@@ -17,8 +17,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        var mummies = _context.Mummies.ToList();
-        return View(mummies);
+        return View();
     }
 
     public IActionResult Privacy()
