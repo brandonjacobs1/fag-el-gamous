@@ -1,14 +1,33 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using fag_el_gamous.Data;
+using Amazon.SimpleSystemsManagement.Model;
+using Amazon.SimpleSystemsManagement;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//SQLLite db connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+//Postgres db Connection
+string postgresConnectionString;
+var request = new GetParameterRequest()
+{
+    Name = "connectionString"
+};
+using (var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.GetBySystemName("us-east-1")))
+{
+    var response = client.GetParameterAsync(request).GetAwaiter().GetResult();
+    postgresConnectionString = response.Parameter.Value;
+}
+
+
+builder.Services.AddDbContext<MummyContext>(opt =>
+        opt.UseNpgsql(postgresConnectionString));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
