@@ -1,0 +1,108 @@
+@model BurialListViewModel
+
+@{
+    //ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<br />
+<partial name="searchPartialView" model=@Model.userSearch/>
+<br />
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                Location
+            </th>
+            <th>
+                ID
+            </th>
+            <th>
+                Sex
+            </th>
+            <th>
+                Head Direction
+            </th>
+            <th>
+                Depth
+            </th>
+            <th>
+                Hair Color
+            </th>
+            <th>
+                Textile Structure
+            </th>
+            <th>
+                Field Book Excavation Year
+            </th>
+            <th>
+                Textile Function
+            </th>
+            <th>
+                Robust
+            </th>
+            <th>
+                Parietal Blossom
+            </th>
+            <th>
+                Estimate Stature
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    
+        @foreach (var item in Model.displayBurial)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.locationString)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sex)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.headDirection)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.depth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.hairColor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.textileStructure)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fieldBookExcavationYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.textileFunction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Robust)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParietalBlossing)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estimateStature)
+                </td>
+                
+                
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
