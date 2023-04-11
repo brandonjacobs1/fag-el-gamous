@@ -1,0 +1,74 @@
+@model fag_el_gamous.Models.Yarnmanipulation
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Yarnmanipulation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Thickness" class="control-label"></label>
+                <input asp-for="Thickness" class="form-control" />
+                <span asp-validation-for="Thickness" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Angle" class="control-label"></label>
+                <input asp-for="Angle" class="form-control" />
+                <span asp-validation-for="Angle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Manipulation" class="control-label"></label>
+                <input asp-for="Manipulation" class="form-control" />
+                <span asp-validation-for="Manipulation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Material" class="control-label"></label>
+                <input asp-for="Material" class="form-control" />
+                <span asp-validation-for="Material" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Count" class="control-label"></label>
+                <input asp-for="Count" class="form-control" />
+                <span asp-validation-for="Count" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Component" class="control-label"></label>
+                <input asp-for="Component" class="form-control" />
+                <span asp-validation-for="Component" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ply" class="control-label"></label>
+                <input asp-for="Ply" class="form-control" />
+                <span asp-validation-for="Ply" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Yarnmanipulationid" class="control-label"></label>
+                <input asp-for="Yarnmanipulationid" class="form-control" />
+                <span asp-validation-for="Yarnmanipulationid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Direction" class="control-label"></label>
+                <input asp-for="Direction" class="form-control" />
+                <span asp-validation-for="Direction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
