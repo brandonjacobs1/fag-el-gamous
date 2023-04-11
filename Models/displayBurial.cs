@@ -15,7 +15,8 @@ namespace fag_el_gamous.Models
         public string? Area { get; set; }
         public string? burialNumber { get; set; }
         public string? locationString { get { return Squarenorthsouth + Northsouth + " " + Squareeastwest + Eastwest + " " + Area + " #" + burialNumber; } }
-        public string? depth { get; set; }
+        public float? depth { get; set; }
+        public string? ageAtDeath { get; set; }
         public string? hairColor { get; set; }
         public string? fieldBookExcavationYear { get; set; }
         public string? sex { get; set; }

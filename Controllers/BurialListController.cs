@@ -22,8 +22,9 @@ namespace fag_el_gamous.Controllers
         
         public async Task<IActionResult> Index()
         {
+            
             var shortBurialList = _context.Burialmains;
-            var x = new BurialListViewModel {
+            var p = new BurialListViewModel {
             displayBurial = await shortBurialList.Select(x => new displayBurial
             {
                 Id = x.Id,
@@ -37,50 +38,68 @@ namespace fag_el_gamous.Controllers
                 hairColor = x.Hair,
                 fieldBookExcavationYear = x.Fieldbookexcavationyear,
                 sex = x.Sex,
+                ageAtDeath = x.Ageatdeath
                 
             }).ToListAsync(),
             userSearch = new userSearch()
         };
         
-            return x != null ?
-                        View(x) :
+            return p != null ?
+                        View(p) :
                         Problem("Entity set 'postgresContext.Burialmains'  is null.");
         }
 
         [HttpPost]
         public async Task<IActionResult> Index(userSearch search)
         {
+            float depth;
             var shortBurialList = _context.Burialmains;
             var x = new BurialListViewModel
             {
-
-                displayBurial = await shortBurialList.Select(x => new displayBurial
-                {
-                    Id = x.Id,
-                    Squarenorthsouth = x.Squarenorthsouth,
-                    Northsouth = x.Northsouth,
-                    Squareeastwest = x.Squareeastwest,
-                    Eastwest = x.Eastwest,
-                    Area = x.Area,
-                    burialNumber = x.Burialnumber,
-                    depth = x.Depth,
-                    hairColor = x.Hair,
-                    fieldBookExcavationYear = x.Fieldbookexcavationyear,
-                    sex = x.Sex,
-                    //textileFunction = x.,
-                    //textileStructure = x.,
-                    //Robust = x.,
-                    //ParietalBlossing = x.,
-                    //estimateStature = x.,
-                }).ToListAsync(),
+                displayBurial = await shortBurialList
+        .Select(x => new displayBurial
+        {
+            
+            Id = x.Id,
+            Squarenorthsouth = x.Squarenorthsouth,
+            Northsouth = x.Northsouth,
+            Squareeastwest = x.Squareeastwest,
+            Eastwest = x.Eastwest,
+            Area = x.Area,
+            ageAtDeath = x.Ageatdeath,
+            burialNumber = x.Burialnumber,
+            depth = x.Depth,
+            hairColor = x.Haircolor,
+            fieldBookExcavationYear = x.Fieldbookexcavationyear,
+            sex = x.Sex
+            //textileFunction = x.,
+            //textileStructure = x.,
+            //Robust = x.,
+            //ParietalBlossing = x.,
+            //estimateStature = x.,
+        })
+        .Where(items =>
+            (string.IsNullOrEmpty(search.locationString) || items.Squarenorthsouth == search.locationString || items.Northsouth == search.locationString || items.Squareeastwest == search.locationString || items.Eastwest == search.locationString || items.burialNumber == search.locationString || items.Area == search.locationString) 
+            && (search.sex == null || items.sex == search.sex)
+            && (search.minDepth == null || items.depth >= search.minDepth)
+            && (search.maxDepth == null || items.depth <= search.maxDepth)
+            && (search.ageAtDeath == null || items.ageAtDeath == search.ageAtDeath)
+            && (search.hairColor == null || items.hairColor == search.hairColor)
+            && (search.headDirection == null || items.headDirection == search.headDirection)
+            && (search.textileFunction == null || items.textileFunction == search.textileFunction)
+            && (search.textileStructure == null || items.textileStructure == search.textileStructure)
+            && (search.Robust == null || items.Robust == search.Robust)
+            && (search.ParietalBlossing == null || items.ParietalBlossing == search.ParietalBlossing)
+            && (search.estimateStature == null || items.estimateStature == search.estimateStature)
+        )
+        .ToListAsync(),
                 userSearch = new userSearch
                 {
                     locationString = search.locationString,
                     sex = search.sex,
                     minDepth = search.minDepth,
                     maxDepth = search.maxDepth,
-                    maxAgeAtDeath = search.maxAgeAtDeath,
-                    minAgeAtDeath = search.minAgeAtDeath,
+                    ageAtDeath = search.ageAtDeath,
                     hairColor = search.hairColor,
                     headDirection = search.headDirection,
                     textileFunction = search.textileFunction,
@@ -95,7 +114,10 @@ namespace fag_el_gamous.Controllers
                         View(x) :
                         Problem("Entity set 'postgresContext.Burialmains'  is null.");
         }
-
+        //public displayBurial sortBurialList(displayBurial items)
+        //{
+        //    return items;
+        //}
 
         // GET: Burialmain/Details/5
         public async Task<IActionResult> Details(long? id)

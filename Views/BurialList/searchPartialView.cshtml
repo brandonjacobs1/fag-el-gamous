@@ -4,11 +4,14 @@
     <label>@Html.DisplayNameFor(model => model.locationString)</label>
     <input asp-for="@Model.locationString" />
 
-    <label>@Html.DisplayNameFor(model => model.minAgeAtDeath)</label>
-    <input asp-for="@Model.minAgeAtDeath" />
-
-    <label>@Html.DisplayNameFor(model => model.maxAgeAtDeath)</label>
-    <input asp-for="@Model.maxAgeAtDeath" />
+    <label>@Html.DisplayNameFor(model => model.ageAtDeath)</label>
+    <select asp-for="@Model.ageAtDeath">
+        <option value="" disabled selected>Filter</option>
+        <option>N</option>
+        <option>I</option>
+        <option>C</option>
+        <option>A</option>
+    </select>
 
     <label>@Html.DisplayNameFor(model => model.minDepth)</label>
     <input asp-for="@Model.minDepth" />
@@ -20,16 +23,39 @@
     <input asp-for="@Model.maxDepth" />
 
     <label>@Html.DisplayNameFor(model => model.hairColor)</label>
-    <input asp-for="@Model.hairColor" />
+    <select asp-for="@Model.hairColor">
+        <option value="" disabled selected>Filter</option>
+        <option>Y</option>
+        <option>B</option>
+        <option>R</option>
+        <option>D</option>
+        <option>A</option>
+        <option>K</option>
+        <option>T</option>
+
+    </select>
 
     <label>@Html.DisplayNameFor(model => model.sex)</label>
-    <input asp-for="@Model.sex" />
+    <select asp-for="@Model.sex">
+        <option value="" disabled selected>Filter</option>
+        <option>M</option>
+        <option>F</option>
+    </select>
 
     <label>@Html.DisplayNameFor(model => model.ParietalBlossing)</label>
     <input asp-for="@Model.ParietalBlossing" />
+    <select asp-for="@Model.ParietalBlossing">
+        <option value="" disabled selected>Filter</option>
+        <option>true</option>
+        <option>false</option>
+    </select>
 
     <label>@Html.DisplayNameFor(model => model.Robust)</label>
-    <input asp-for="@Model.Robust" />
+    <select asp-for="@Model.Robust">
+        <option value="" disabled selected>Filter</option>
+        <option>true</option>
+        <option>false</option>
+    </select>
 
     <label>@Html.DisplayNameFor(model => model.textileFunction)</label>
     <input asp-for="@Model.textileFunction" />
