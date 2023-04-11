@@ -29,8 +29,12 @@ using (var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoin
 builder.Services.AddDbContext<postgresContext>(opt =>
         opt.UseNpgsql(postgresConnectionString));
 
+
+// Role-Based Authentication
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddRoles<IdentityRole>();
+
 builder.Services.AddControllersWithViews();
 
 // Require better passwords than the default options
