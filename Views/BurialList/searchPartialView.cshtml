@@ -1,0 +1,43 @@
+﻿@model userSearch
+
+<form method="post" asp-action="Index">
+    <label>@Html.DisplayNameFor(model => model.locationString)</label>
+    <input asp-for="@Model.locationString" />
+
+    <label>@Html.DisplayNameFor(model => model.minAgeAtDeath)</label>
+    <input asp-for="@Model.minAgeAtDeath" />
+
+    <label>@Html.DisplayNameFor(model => model.maxAgeAtDeath)</label>
+    <input asp-for="@Model.maxAgeAtDeath" />
+
+    <label>@Html.DisplayNameFor(model => model.minDepth)</label>
+    <input asp-for="@Model.minDepth" />
+
+    <label>@Html.DisplayNameFor(model => model.headDirection)</label>
+    <input asp-for="@Model.headDirection" />
+
+    <label>@Html.DisplayNameFor(model => model.maxDepth)</label>
+    <input asp-for="@Model.maxDepth" />
+
+    <label>@Html.DisplayNameFor(model => model.hairColor)</label>
+    <input asp-for="@Model.hairColor" />
+
+    <label>@Html.DisplayNameFor(model => model.sex)</label>
+    <input asp-for="@Model.sex" />
+
+    <label>@Html.DisplayNameFor(model => model.ParietalBlossing)</label>
+    <input asp-for="@Model.ParietalBlossing" />
+
+    <label>@Html.DisplayNameFor(model => model.Robust)</label>
+    <input asp-for="@Model.Robust" />
+
+    <label>@Html.DisplayNameFor(model => model.textileFunction)</label>
+    <input asp-for="@Model.textileFunction" />
+
+    <label>@Html.DisplayNameFor(model => model.textileStructure)</label>
+    <input asp-for="@Model.textileStructure" />
+
+    <label>@Html.DisplayNameFor(model => model.estimateStature)</label>
+    <input asp-for="@Model.estimateStature" />
+    <button type="submit">Search</button>
+</form>
