@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using fag_el_gamous.Models;
 using fag_el_gamous.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace fag_el_gamous.Controllers;
 
@@ -15,12 +16,14 @@ public class HomeController : Controller
         _context = context;
     }
 
+    [AllowAnonymous]
     public IActionResult Index()
     {
         var test = _context.Teammembers.ToList();
         return View(test);
     }
 
+    [Authorize]
     public IActionResult Privacy()
     {
         return View();

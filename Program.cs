@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using fag_el_gamous.Data;
 using Amazon.SimpleSystemsManagement.Model;
@@ -29,8 +30,15 @@ using (var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoin
 builder.Services.AddDbContext<postgresContext>(opt =>
         opt.UseNpgsql(postgresConnectionString));
 
+builder.Services.AddScoped<DbContext>(provider => provider.GetService<ApplicationDbContext>());
+
+// Role-Based Authentication
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddRoles<IdentityRole>();
+
+builder.Services.AddScoped<IRoleStore<IdentityRole>, RoleStore<IdentityRole>>();
+
 builder.Services.AddControllersWithViews();
 
 // Require better passwords than the default options
