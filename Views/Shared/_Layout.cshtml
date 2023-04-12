@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - fag_el_gamous</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/fag_el_gamous.styles.css" asp-append-version="true" />
@@ -32,6 +33,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Model" asp-action="Model">Models</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Research" asp-action="Research">Research</a>
+                        </li>
                         @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="BurialList" asp-action="Index">Burials</a>
                         </li>*@
@@ -46,7 +50,7 @@
             @RenderBody()
         </main>
     </div>
-
+    <partial name="_CookieConsentPartial" />
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - fag_el_gamous - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>

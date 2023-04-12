@@ -1,11 +1,19 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using fag_el_gamous.Data;
 using Amazon.SimpleSystemsManagement.Model;
 using Amazon.SimpleSystemsManagement;
+using Microsoft.AspNetCore.CookiePolicy;
+//using fag_el_gamous.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+//Cookie
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
 
 // Add services to the container.
 //SQLLite db connection
@@ -70,9 +78,12 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+//Cookie
+app.UseCookiePolicy();
+
 app.Use(async (context, next) =>
 {
-    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; frame-src 'self'");
+    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' https://ajax.googleapis.com 'unsafe-inline'; style-src 'self'; font-src 'self'; img-src 'self'; frame-src 'self'");
 
     await next();
 });
