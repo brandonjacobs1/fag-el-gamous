@@ -17,8 +17,6 @@
         <tr>
 
             <th>
-                
-
                 <button form="search" type="submit" class="btn btn-link" style="color: blue; text-decoration: underline; padding: 0; border: none; background-color: transparent;" asp-action="Index" asp-route-sortOrder="@ViewData["locationParam"]">Location</button>
             </th>
             <th>
@@ -46,8 +44,12 @@
                 Field Book Excavation Year
             </th>
             <th>
+                Face Bundles
+            </th>
+            <th>
                 Textile Function
             </th>
+
             <th>
                 Robust
             </th>
@@ -91,6 +93,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.fieldBookExcavationYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.faceBundles)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.textileFunction)

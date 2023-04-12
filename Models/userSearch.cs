@@ -18,8 +18,12 @@ namespace fag_el_gamous.Models
         //bodyanalysischart
 		public bool? Robust { get; set; } //bool
 		public bool? ParietalBlossing { get; set; } //bool
-		public string? estimateStature { get; set; }//num 
-        
+
+        public decimal? minEstimateStature { get; set; }//num 
+        public decimal? maxEstimateStature { get; set; }//num
+                                                        //
+        public string? faceBundles { get; set; }
+        public string? text { get; set; }
     }
 }
 
