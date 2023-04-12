@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using fag_el_gamous.Data;
 using Amazon.SimpleSystemsManagement.Model;
 using Amazon.SimpleSystemsManagement;
+//using fag_el_gamous.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
