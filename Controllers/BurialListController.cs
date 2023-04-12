@@ -53,7 +53,7 @@ namespace fag_el_gamous.Controllers
                     Area = x.Area,
                     ageAtDeath = x.Ageatdeath,
                     burialNumber = x.BurialnumberX,
-                    depth = x.Depth,
+                    depth = float.Parse(x.Depth),
                     hairColor = x.Haircolor,
                     fieldBookExcavationYear = x.Fieldbookexcavationyear,
                     sex = x.Sex
@@ -187,21 +187,9 @@ namespace fag_el_gamous.Controllers
         
     }
 
-        public async Task<IActionResult> Details(long? id)
+        public async Task<IActionResult> Details(string id)
         {
-            if (id == null || _context.Burialmains == null)
-            {
-                return NotFound();
-            }
-
-            var burialmain = await _context.Burialmains
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (burialmain == null)
-            {
-                return NotFound();
-            }
-
-            return View(burialmain);
+            return RedirectToAction("Details", "Detailscleaneddatum", new { id = id});
         }
     }
 }

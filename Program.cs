@@ -93,7 +93,6 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute("Pages", "{pageNum}", new { Controller = "BurialList", Action = "Index", pageNum = 1 });
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

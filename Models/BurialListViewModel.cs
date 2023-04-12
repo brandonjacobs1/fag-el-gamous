@@ -1,5 +1,5 @@
 ﻿using System;
-using X.PagedList;
+//using X.PagedList;
 namespace fag_el_gamous.Models
 {
 	public class BurialListViewModel
