@@ -7,7 +7,7 @@ namespace fag_el_gamous.Models
 	public class displayBurial
 	{
 		[Key]
-		public long Id { get; set; }
+		public string Id { get; set; }
         public int Squarenorthsouth { get; set; }
         public string? Northsouth { get; set; }
         public int Squareeastwest { get; set; }

@@ -45,6 +45,7 @@ namespace fag_el_gamous.Controllers
             var displayBurial = shortBurialList
                 .Select(x => new displayBurial
                 {
+                    Id = x.Id,
                     Squarenorthsouth = x.Squarenorthsouth,
                     Northsouth = x.Northsouth,
                     Squareeastwest = x.Squareeastwest,
