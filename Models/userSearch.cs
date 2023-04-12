@@ -15,9 +15,6 @@ namespace fag_el_gamous.Models
         public string? textileStructure { get; set; } //
         //textile function
         public string? textileFunction { get; set; } //
-        //bodyanalysischart
-		public bool? Robust { get; set; } //bool
-		public bool? ParietalBlossing { get; set; } //bool
 
         public decimal? minEstimateStature { get; set; }//num 
         public decimal? maxEstimateStature { get; set; }//num

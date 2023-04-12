@@ -63,8 +63,6 @@ namespace fag_el_gamous.Controllers
                     //textileColor
                     //textileFunction = x.,
                     //textileStructure = x.,
-                    //Robust = x.,
-                    //ParietalBlossing = x.,
                     estimateStature = x.Estimatestature,
                 })
                 .Where(items =>
@@ -80,14 +78,12 @@ namespace fag_el_gamous.Controllers
                     && (search.ageAtDeath == null || items.ageAtDeath == search.ageAtDeath)
                     && (search.hairColor == null || items.hairColor == search.hairColor)
                     && (search.headDirection == null || items.headDirection == search.headDirection)
-                    && (search.textileFunction == null || items.textileFunction == search.textileFunction)
-                    && (search.textileStructure == null || items.textileStructure == search.textileStructure)
+                    //&& (search.textileFunction == null || items.textileFunction == search.textileFunction)
+                    //&& (search.textileStructure == null || items.textileStructure == search.textileStructure)
                     && (search.faceBundles == null || items.faceBundles == search.faceBundles)
-                    && (search.Robust == null || items.Robust == search.Robust)
-                    && (search.ParietalBlossing == null || items.ParietalBlossing == search.ParietalBlossing)
                     && (search.minEstimateStature == null || items.estimateStature >= search.minEstimateStature)
                     && (search.maxEstimateStature == null || items.estimateStature <= search.maxEstimateStature)
-                    && (string.IsNullOrEmpty(search.locationString) || items.text.Contains(search.text))
+                    && (string.IsNullOrEmpty(search.text) || items.text.Contains(search.text))
                 );
 
             //switch (sortOrder)
@@ -181,10 +177,8 @@ namespace fag_el_gamous.Controllers
                         ageAtDeath = search.ageAtDeath,
                         hairColor = search.hairColor,
                         headDirection = search.headDirection,
-                        textileFunction = search.textileFunction,
-                        textileStructure = search.textileStructure,
-                        //Robust = search.Robust,
-                        //ParietalBlossing = search.ParietalBlossing,
+                        //textileFunction = search.textileFunction,
+                        //textileStructure = search.textileStructure,
                         minEstimateStature = search.minEstimateStature,
                         maxEstimateStature = search.maxEstimateStature,
                         text = search.text

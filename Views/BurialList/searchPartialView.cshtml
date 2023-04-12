@@ -48,25 +48,11 @@
         <option>N LL</option>
     </select>
 
+    <label>@Html.DisplayNameFor(model => model.faceBundles)</label>
     <select asp-for="@Model.faceBundles">
         <option value="" disabled selected>Filter</option>
         <option>T</option>
         <option>F</option>
-    </select>
-
-    <label>@Html.DisplayNameFor(model => model.ParietalBlossing)</label>
-    <input asp-for="@Model.ParietalBlossing" />
-    <select asp-for="@Model.ParietalBlossing">
-        <option value="" disabled selected>Filter</option>
-        <option>true</option>
-        <option>false</option>
-    </select>
-
-    <label>@Html.DisplayNameFor(model => model.Robust)</label>
-    <select asp-for="@Model.Robust">
-        <option value="" disabled selected>Filter</option>
-        <option>true</option>
-        <option>false</option>
     </select>
 
     <label>@Html.DisplayNameFor(model => model.textileFunction)</label>
@@ -80,6 +66,9 @@
 
     <label>@Html.DisplayNameFor(model => model.maxEstimateStature)</label>
     <input asp-for="@Model.maxEstimateStature" />
+
+    <label>@Html.DisplayNameFor(model => model.text)</label>
+    <input asp-for="@Model.text" />
 
     <button type="submit">Search</button>
 </form>
