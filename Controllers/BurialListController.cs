@@ -186,7 +186,7 @@ namespace fag_el_gamous.Controllers
                         Problem("Entity set 'postgresContext.Burialmains'  is null.");
         
     }
-
+        // Forward the details page to the cleaned data controller
         public async Task<IActionResult> Details(string id)
         {
             return RedirectToAction("Details", "Detailscleaneddatum", new { id = id});
