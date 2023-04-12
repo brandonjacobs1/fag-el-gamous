@@ -190,21 +190,10 @@ namespace fag_el_gamous.Controllers
         
     }
 
-        //public async Task<IActionResult> Details(long? id)
-        //{
-        //    if (id == null || _context.Burialmains == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var burialmain = await _context.Burialmains
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (burialmain == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(burialmain);
-        //}
+        // Forward the details page to the cleaned data controller
+        public async Task<IActionResult> Details(string id)
+        {
+            return RedirectToAction("Details", "Detailscleaneddatum", new { id = id});
+        }
     }
 }
