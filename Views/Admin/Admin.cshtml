@@ -3,8 +3,52 @@
 *@
 @{
 }
+@model Application
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Admin Page</p>
+    @foreach (var u in Model.Users)
+    {
+        <p>@u.Email</p>
+    }
+    <br />
+
+    @foreach (var u in Model.Roles)
+    {
+        <p>@u.Name</p>
+    }
+    <br />
+
+    <h3>Add a new role</h3>
+    <form asp-controller="Admin" asp-action="AddRole" method="post">
+        <label asp-for="NewRole">New role name:</label>
+        <input asp-for="NewRole" />
+        <button type="submit">Submit</button>
+    </form>
+
+    <h3>Assign user to role</h3>
+   
+    <form asp-controller="Admin" asp-action="AddRoleToUser" method="post">
+        <label for="userId">Users:</label>
+        <select id="userId" name="userId">
+            @foreach (var user in Model.Users)
+            {
+                <option value="@user.Id">@user.Email</option>
+            }
+        </select>
+
+        <label for="roleName">Roles:</label>
+        <select id="roleName" name="roleName">
+            @foreach (var role in Model.Roles)
+            {
+                <option value="@role.Name">@role.Name</option>
+            }
+        </select>
+
+        <button type="submit">submit</button>
+
+    </form>
+
+
 </div>

@@ -36,9 +36,15 @@ builder.Services.AddScoped<DbContext>(provider => provider.GetService<Applicatio
 // Role-Based Authentication
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddRoles<IdentityRole>();
+    .AddRoles<IdentityRole>()
+    .AddDefaultTokenProviders();
+
+//builder.Services.AddIdentityCore<IdentityUser>()
+//    .AddRoleManager<IdentityRole>()
+//    .AddUserManager<IdentityUser>();
 
 builder.Services.AddScoped<IRoleStore<IdentityRole>, RoleStore<IdentityRole>>();
+//builder.Services.AddScoped<IUserRoleStore<IdentityUser>, CustomUserRoleStore>();
 
 builder.Services.AddControllersWithViews();
 
