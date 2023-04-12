@@ -16,9 +16,6 @@
     <label>@Html.DisplayNameFor(model => model.minDepth)</label>
     <input asp-for="@Model.minDepth" />
 
-    <label>@Html.DisplayNameFor(model => model.headDirection)</label>
-    <input asp-for="@Model.headDirection" />
-
     <label>@Html.DisplayNameFor(model => model.maxDepth)</label>
     <input asp-for="@Model.maxDepth" />
 
@@ -39,6 +36,21 @@
     <select asp-for="@Model.sex">
         <option value="" disabled selected>Filter</option>
         <option>M</option>
+        <option>F</option>
+    </select>
+
+    <label>@Html.DisplayNameFor(model => model.headDirection)</label>
+    <select asp-for="@Model.headDirection">
+        <option value="" disabled selected>Filter</option>
+        <option>E</option>
+        <option>I</option>
+        <option>W</option>
+        <option>N LL</option>
+    </select>
+
+    <select asp-for="@Model.faceBundles">
+        <option value="" disabled selected>Filter</option>
+        <option>T</option>
         <option>F</option>
     </select>
 
@@ -63,8 +75,12 @@
     <label>@Html.DisplayNameFor(model => model.textileStructure)</label>
     <input asp-for="@Model.textileStructure" />
 
-    <label>@Html.DisplayNameFor(model => model.estimateStature)</label>
-    <input asp-for="@Model.estimateStature" />
+    <label>@Html.DisplayNameFor(model => model.minEstimateStature)</label>
+    <input asp-for="@Model.minEstimateStature" />
+
+    <label>@Html.DisplayNameFor(model => model.maxEstimateStature)</label>
+    <input asp-for="@Model.maxEstimateStature" />
+
     <button type="submit">Search</button>
 </form>
 <a asp-action="Index">Back to Full List</a>
