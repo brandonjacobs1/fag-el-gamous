@@ -40,5 +40,7 @@ namespace fag_el_gamous.Models
         public string? Fieldbookexcavationyear { get; set; }
         public string? Clusternumber { get; set; }
         public string? Shaftnumber { get; set; }
+
+        public displayBurial displayBurail { get; set; }
     }
 }

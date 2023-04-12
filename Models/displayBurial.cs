@@ -8,13 +8,19 @@ namespace fag_el_gamous.Models
 	{
 		[Key]
 		public long Id { get; set; }
-        public string? Squarenorthsouth { get; set; }
+        public int Squarenorthsouth { get; set; }
         public string? Northsouth { get; set; }
-        public string? Squareeastwest { get; set; }
+        public int Squareeastwest { get; set; }
         public string? Eastwest { get; set; }
         public string? Area { get; set; }
         public string? burialNumber { get; set; }
-        public string? locationString { get { return Squarenorthsouth + Northsouth + " " + Squareeastwest + Eastwest + " " + Area + " #" + burialNumber; } }
+        public string? locationString
+        {
+            get
+            {
+                return $"{Squarenorthsouth}{Northsouth} {Squareeastwest}{Eastwest} {Area} #{burialNumber}";
+            }
+        }
         public float? depth { get; set; }
         public string? ageAtDeath { get; set; }
         public string? hairColor { get; set; }

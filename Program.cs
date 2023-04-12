@@ -31,6 +31,7 @@ builder.Services.AddDbContext<postgresContext>(opt =>
         opt.UseNpgsql(postgresConnectionString));
 
 builder.Services.AddScoped<DbContext>(provider => provider.GetService<ApplicationDbContext>());
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 // Role-Based Authentication
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -81,6 +82,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapControllerRoute("Pages", "{pageNum}", new { Controller = "BurialList", Action = "Index", pageNum = 1 });
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

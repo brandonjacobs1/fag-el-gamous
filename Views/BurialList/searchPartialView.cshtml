@@ -1,6 +1,6 @@
 ﻿@model userSearch
 
-<form method="post" asp-action="Index">
+<form method="post" asp-action="Index" id="search">
     <label>@Html.DisplayNameFor(model => model.locationString)</label>
     <input asp-for="@Model.locationString" />
 
@@ -67,3 +67,4 @@
     <input asp-for="@Model.estimateStature" />
     <button type="submit">Search</button>
 </form>
+<a asp-action="Index">Back to Full List</a>

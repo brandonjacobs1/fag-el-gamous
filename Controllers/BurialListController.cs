@@ -6,120 +6,186 @@ using fag_el_gamous.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using fag_el_gamous.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using static Humanizer.On;
+
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace fag_el_gamous.Controllers
 {
     public class BurialListController : Controller
     {
-        private readonly postgresContext _context;
+    private readonly postgresContext _context;
 
         public BurialListController(postgresContext context)
         {
             _context = context;
         }
-        [HttpGet]
         
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pageNumber, string sortOrder, userSearch? search = null)
         {
-            
-            var shortBurialList = _context.Burialmains;
-            var p = new BurialListViewModel {
-            displayBurial = await shortBurialList.Select(x => new displayBurial
-            {
-                Id = x.Id,
-                Squarenorthsouth = x.Squarenorthsouth,
-                Northsouth = x.Northsouth,
-                Squareeastwest = x.Squareeastwest,
-                Eastwest = x.Eastwest,
-                Area = x.Area,
-                burialNumber = x.Burialnumber,
-                depth = x.Depth,
-                hairColor = x.Hair,
-                fieldBookExcavationYear = x.Fieldbookexcavationyear,
-                sex = x.Sex,
-                ageAtDeath = x.Ageatdeath
-                
-            }).ToListAsync(),
-            userSearch = new userSearch()
-        };
-        
-            return p != null ?
-                        View(p) :
-                        Problem("Entity set 'postgresContext.Burialmains'  is null.");
-        }
+            //ViewData["CurrentSort"] = sortOrder;
+            //ViewData["locationParam"] = sortOrder == "locationString" ? "locationString_desc" : "locationString";
+            //ViewData["IdSortParm"] = sortOrder == "Id" ? "id_desc" : "Id";
+            //ViewData["depthSortParm"] = sortOrder == "Depth" ? "depth_desc" : "Depth";
+            //ViewData["ageAtDeathSortParm"] = sortOrder == "AgeAtDeath" ? "ageatdeath_desc" : "AgeAtDeath";
+            //ViewData["hairColorSortParm"] = sortOrder == "HairColor" ? "haircolor_desc" : "HairColor";
+            //ViewData["fieldBookExcavationYearSortParm"] = sortOrder == "FieldBookExcavationYear" ? "fieldbookexcavationyear_desc" : "FieldBookExcavationYear";
+            //ViewData["sexSortParm"] = sortOrder == "Sex" ? "sex_desc" : "Sex";
+            //ViewData["headDirectionSortParm"] = sortOrder == "HeadDirection" ? "headdirection_desc" : "HeadDirection";
+            //ViewData["textileStructureSortParm"] = sortOrder == "TextileStructure" ? "textilestructure_desc" : "TextileStructure";
+            //ViewData["textileFunctionSortParm"] = sortOrder == "TextileFunction" ? "textilefunction_desc" : "TextileFunction";
+            //ViewData["RobustSortParm"] = sortOrder == "Robust" ? "robust_desc" : "Robust";
+            //ViewData["ParietalBlossingSortParm"] = sortOrder == "ParietalBlossing" ? "parietalblossing_desc" : "ParietalBlossing";
+            //ViewData["estimateStatureSortParm"] = sortOrder == "EstimateStature" ? "estimatestature_desc" : "EstimateStature";
 
-        [HttpPost]
-        public async Task<IActionResult> Index(userSearch search)
-        {
-            float depth;
-            var shortBurialList = _context.Burialmains;
-            var x = new BurialListViewModel
-            {
-                displayBurial = await shortBurialList
-        .Select(x => new displayBurial
-        {
-            
-            Id = x.Id,
-            Squarenorthsouth = x.Squarenorthsouth,
-            Northsouth = x.Northsouth,
-            Squareeastwest = x.Squareeastwest,
-            Eastwest = x.Eastwest,
-            Area = x.Area,
-            ageAtDeath = x.Ageatdeath,
-            burialNumber = x.Burialnumber,
-            depth = x.Depth,
-            hairColor = x.Haircolor,
-            fieldBookExcavationYear = x.Fieldbookexcavationyear,
-            sex = x.Sex
-            //textileFunction = x.,
-            //textileStructure = x.,
-            //Robust = x.,
-            //ParietalBlossing = x.,
-            //estimateStature = x.,
-        })
-        .Where(items =>
-            (string.IsNullOrEmpty(search.locationString) || items.Squarenorthsouth == search.locationString || items.Northsouth == search.locationString || items.Squareeastwest == search.locationString || items.Eastwest == search.locationString || items.burialNumber == search.locationString || items.Area == search.locationString) 
-            && (search.sex == null || items.sex == search.sex)
-            && (search.minDepth == null || items.depth >= search.minDepth)
-            && (search.maxDepth == null || items.depth <= search.maxDepth)
-            && (search.ageAtDeath == null || items.ageAtDeath == search.ageAtDeath)
-            && (search.hairColor == null || items.hairColor == search.hairColor)
-            && (search.headDirection == null || items.headDirection == search.headDirection)
-            && (search.textileFunction == null || items.textileFunction == search.textileFunction)
-            && (search.textileStructure == null || items.textileStructure == search.textileStructure)
-            && (search.Robust == null || items.Robust == search.Robust)
-            && (search.ParietalBlossing == null || items.ParietalBlossing == search.ParietalBlossing)
-            && (search.estimateStature == null || items.estimateStature == search.estimateStature)
-        )
-        .ToListAsync(),
-                userSearch = new userSearch
+
+            var shortBurialList = _context.Detailscleaneddata;
+            int pageSize = 10;
+            var displayBurial = shortBurialList
+                .Select(x => new displayBurial
                 {
-                    locationString = search.locationString,
-                    sex = search.sex,
-                    minDepth = search.minDepth,
-                    maxDepth = search.maxDepth,
-                    ageAtDeath = search.ageAtDeath,
-                    hairColor = search.hairColor,
-                    headDirection = search.headDirection,
-                    textileFunction = search.textileFunction,
-                    textileStructure = search.textileStructure,
-                    Robust = search.Robust,
-                    ParietalBlossing = search.ParietalBlossing,
-                    estimateStature = search.estimateStature
-                }
-            };
+                    Squarenorthsouth = x.Squarenorthsouth,
+                    Northsouth = x.Northsouth,
+                    Squareeastwest = x.Squareeastwest,
+                    Eastwest = x.Eastwest,
+                    Area = x.Area,
+                    ageAtDeath = x.Ageatdeath,
+                    burialNumber = x.BurialnumberX,
+                    depth = x.Depth,
+                    hairColor = x.Haircolor,
+                    fieldBookExcavationYear = x.Fieldbookexcavationyear,
+                    sex = x.Sex
+                    //textileFunction = x.,
+                    //textileStructure = x.,
+                    //Robust = x.,
+                    //ParietalBlossing = x.,
+                    //estimateStature = x.,
+                })
+                .Where(items =>
+                    (string.IsNullOrEmpty(search.locationString) ||
+                         items.Squarenorthsouth.ToString() == search.locationString ||
+                         items.Northsouth == search.locationString ||
+                         items.Squareeastwest.ToString() == search.locationString ||
+                         items.Eastwest == search.locationString ||
+                         items.burialNumber == search.locationString ||
+                         items.Area == search.locationString) && (search.sex == null || items.sex == search.sex)
+                    && (search.minDepth == null || items.depth >= search.minDepth)
+                    && (search.maxDepth == null || items.depth <= search.maxDepth)
+                    && (search.ageAtDeath == null || items.ageAtDeath == search.ageAtDeath)
+                    && (search.hairColor == null || items.hairColor == search.hairColor)
+                    && (search.headDirection == null || items.headDirection == search.headDirection)
+                    && (search.textileFunction == null || items.textileFunction == search.textileFunction)
+                    && (search.textileStructure == null || items.textileStructure == search.textileStructure)
+                    && (search.Robust == null || items.Robust == search.Robust)
+                    && (search.ParietalBlossing == null || items.ParietalBlossing == search.ParietalBlossing)
+                    && (search.estimateStature == null || items.estimateStature == search.estimateStature)
+                );
 
+            //switch (sortOrder)
+            //{
+            //    case "locationString":
+            //        displayBurial = displayBurial.OrderBy(s => s.locationString);
+            //        break;
+            //    case "locationString_desc":
+            //        displayBurial = displayBurial.OrderByDescending(s => s.locationString);
+            //        break;
+            //    case "Depth":
+            //        displayBurial = displayBurial.OrderBy(s => s.depth);
+            //        break;
+            //    case "depth_desc":
+            //        displayBurial = displayBurial.OrderByDescending(s => s.depth);
+            //        break;
+            //    case "AgeAtDeath":
+            //        displayBurial = displayBurial.OrderBy(s => s.ageAtDeath);
+            //        break;
+            //    case "ageatdeath_desc":
+            //        displayBurial = displayBurial.OrderByDescending(s => s.ageAtDeath);
+            //        break;
+            //    case "HairColor":
+            //        displayBurial = displayBurial.OrderBy(s => s.hairColor);
+            //        break;
+            //    case "haircolor_desc":
+            //        displayBurial = displayBurial.OrderByDescending(s => s.hairColor);
+            //        break;
+            //    case "FieldBookExcavationYear":
+            //        displayBurial = displayBurial.OrderBy(s => s.fieldBookExcavationYear);
+            //        break;
+            //    case "fieldbookexcavationyear_desc":
+            //        displayBurial = displayBurial.OrderByDescending(s => s.fieldBookExcavationYear);
+            //        break;
+            //    case "Sex":
+            //        displayBurial = displayBurial.OrderBy(s => s.sex);
+            //        break;
+            //    case "sex_desc":
+            //        displayBurial = displayBurial.OrderByDescending(s => s.sex);
+            //        break;
+            //    case "HeadDirection":
+            //        displayBurial = displayBurial.OrderBy(s => s.headDirection);
+            //        break;
+            //    case "headdirection_desc":
+            //        displayBurial = displayBurial.OrderByDescending(s => s.headDirection);
+            //        break;
+            //    case "TextileStructure":
+            //        displayBurial = displayBurial.OrderBy(s => s.textileStructure);
+            //        break;
+            //    case "textilestructure_desc":
+            //        displayBurial = displayBurial.OrderByDescending(s => s.textileStructure);
+            //        break;
+            //    case "TextileFunction":
+            //        displayBurial = displayBurial.OrderBy(s => s.textileFunction);
+            //        break;
+            //    case "textilefunction_desc":
+            //        displayBurial = displayBurial.OrderByDescending(s => s.textileFunction);
+            //        break;
+            //    case "Robust":
+            //        displayBurial = displayBurial.OrderBy(s => s.Robust);
+            //        break;
+            //    case "robust_desc":
+            //        displayBurial = displayBurial.OrderByDescending(s => s.Robust);
+            //        break;
+            //    case "ParietalBlossing":
+            //        displayBurial = displayBurial.OrderBy(s => s.ParietalBlossing);
+            //        break;
+            //    case "parietalblossing_desc":
+            //        displayBurial = displayBurial.OrderByDescending(s => s.ParietalBlossing);
+            //        break;
+            //    case "EstimateStature":
+            //        displayBurial = displayBurial.OrderBy(s => s.estimateStature);
+            //        break;
+            //    case "estimatestature_desc":
+            //        displayBurial = displayBurial.OrderByDescending(s => s.estimateStature);
+            //        break;
+            //    default:
+            //        displayBurial = displayBurial.OrderBy(s => s.locationString);
+            //        break;
+            //}
+
+
+            var x = new BurialListViewModel {
+                displayBurial = await PaginatedList<displayBurial>.CreateAsync(displayBurial.AsNoTracking(), pageNumber ?? 1, pageSize),
+                    userSearch = new userSearch
+                    {
+                        locationString = search.locationString,
+                        sex = search.sex,
+                        minDepth = search.minDepth,
+                        maxDepth = search.maxDepth,
+                        ageAtDeath = search.ageAtDeath,
+                        hairColor = search.hairColor,
+                        headDirection = search.headDirection,
+                        textileFunction = search.textileFunction,
+                        textileStructure = search.textileStructure,
+                        Robust = search.Robust,
+                        ParietalBlossing = search.ParietalBlossing,
+                        estimateStature = search.estimateStature
+                    }
+                };
             return x != null ?
                         View(x) :
                         Problem("Entity set 'postgresContext.Burialmains'  is null.");
-        }
-        //public displayBurial sortBurialList(displayBurial items)
-        //{
-        //    return items;
-        //}
+        
+    }
 
-        // GET: Burialmain/Details/5
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null || _context.Burialmains == null)
@@ -138,4 +204,3 @@ namespace fag_el_gamous.Controllers
         }
     }
 }
-
