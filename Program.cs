@@ -9,11 +9,24 @@ using Amazon.SimpleSystemsManagement;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-//SQLLite db connection
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+//Identity db connection
+
+string identityConnectionString;
+var identityRequest = new GetParameterRequest()
+{
+    Name = "identityConnectionString"
+};
+using (var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.GetBySystemName("us-east-1")))
+{
+    var resp = client.GetParameterAsync(identityRequest).GetAwaiter().GetResult();
+    identityConnectionString = resp.Parameter.Value;
+}
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(connectionString));
+    options.UseNpgsql(identityConnectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
 
 //Postgres db Connection
 string postgresConnectionString;
