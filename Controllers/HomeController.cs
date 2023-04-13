@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using fag_el_gamous.Models;
 using fag_el_gamous.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace fag_el_gamous.Controllers;
 
@@ -19,8 +20,8 @@ public class HomeController : Controller
     [AllowAnonymous]
     public IActionResult Index()
     {
-        var test = _context.Teammembers.ToList();
-        return View(test);
+
+        return View();
     }
 
     [Authorize]
@@ -33,6 +34,12 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    [AllowAnonymous]
+    public IActionResult CookiePolicy()
+    {
+        return View();
     }
 }
 

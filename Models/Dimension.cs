@@ -9,5 +9,7 @@ namespace fag_el_gamous.Models
         public string? Dimensiontype { get; set; }
         public string? Value { get; set; }
         public int? Dimensionid { get; set; }
+
+        public List<DimensionTextile>? DimensionTextiles { get; set; }
     }
 }

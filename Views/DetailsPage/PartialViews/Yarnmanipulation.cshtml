@@ -1,0 +1,44 @@
+﻿@model List<YarnmanipulationTextile>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Yarn Information</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Thickness</th>
+                        <th>Angle</th>
+                        <th>Manipulation</th>
+                        <th>Material</th>
+                        <th>Count</th>
+                        <th>Component</th>
+                        <th>Ply</th>
+                        <th>Yarn Manipulation ID</th>
+                        <th>Direction</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                    {
+                        <tr>
+                            <td>@m.Yarnmanipulation.Id</td>
+                            <td>@m.Yarnmanipulation.Thickness</td>
+                            <td>@m.Yarnmanipulation.Angle</td>
+                            <td>@m.Yarnmanipulation.Manipulation</td>
+                            <td>@m.Yarnmanipulation.Material</td>
+                            <td>@m.Yarnmanipulation.Count</td>
+                            <td>@m.Yarnmanipulation.Component</td>
+                            <td>@m.Yarnmanipulation.Ply</td>
+                            <td>@m.Yarnmanipulation.Yarnmanipulationid</td>
+                            <td>@m.Yarnmanipulation.Direction</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,30 @@
+﻿@model List<ColorTextile>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Color Information</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Value</th>
+                        <th>Color ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                    {
+                        <tr>
+                            <td>@m.Color.Id</td>
+                            <td>@m.Color.Value</td>
+                            <td>@m.Color.Colorid</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

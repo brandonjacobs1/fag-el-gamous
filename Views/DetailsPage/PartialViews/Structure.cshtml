@@ -1,0 +1,28 @@
+﻿@model List<StructureTextile>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Structure Information</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Value</th>
+                        <th>Structure ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                    {
+                        <tr>
+                            <td>@m.Structure.Id</td>
+                            <td>@m.Structure.Value</td>
+                            <td>@m.Structure.Structureid</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

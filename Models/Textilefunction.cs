@@ -8,5 +8,7 @@ namespace fag_el_gamous.Models
         public long Id { get; set; }
         public string? Value { get; set; }
         public int? Textilefunctionid { get; set; }
+
+        public List<TextilefunctionTextile>? TextilefunctionTextiles { get; set; }
     }
 }

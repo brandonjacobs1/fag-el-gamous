@@ -4,9 +4,16 @@ using Microsoft.EntityFrameworkCore;
 using fag_el_gamous.Data;
 using Amazon.SimpleSystemsManagement.Model;
 using Amazon.SimpleSystemsManagement;
+using Microsoft.AspNetCore.CookiePolicy;
 //using fag_el_gamous.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+//Cookie
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
 
 // Add services to the container.
 
@@ -45,6 +52,7 @@ builder.Services.AddDbContext<postgresContext>(opt =>
         opt.UseNpgsql(postgresConnectionString));
 
 builder.Services.AddScoped<DbContext>(provider => provider.GetService<ApplicationDbContext>());
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 // Role-Based Authentication
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -95,9 +103,12 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+//Cookie
+app.UseCookiePolicy();
+
 app.Use(async (context, next) =>
 {
-    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; frame-src 'self'");
+    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' https://ajax.googleapis.com 'unsafe-inline'; style-src 'self'; font-src 'self'; img-src 'self'; frame-src 'self'");
 
     await next();
 });

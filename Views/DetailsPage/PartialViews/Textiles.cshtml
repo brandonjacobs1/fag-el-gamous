@@ -1,0 +1,43 @@
+﻿@model List<BurialmainTextile>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Textile Information</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Locale</th>
+                        <th>Textile ID</th>
+                        <th>Description</th>
+                        <th>Burial Number</th>
+                        <th>Estimated Period</th>
+                        <th>Sample Date</th>
+                        <th>Photographed Date</th>
+                        <th>Direction</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                    {
+                        <tr>
+                            
+                            <td>@m.Textile.Id</td>
+                            <td>@m.Textile.Locale</td>
+                            <td>@m.Textile.Textileid</td>
+                            <td>@m.Textile.Description</td>
+                            <td>@m.Textile.Burialnumber</td>
+                            <td>@m.Textile.Estimatedperiod</td>
+                            <td>@m.Textile.Sampledate</td>
+                            <td>@m.Textile.Photographeddate</td>
+                            <td>@m.Textile.Direction</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

@@ -1,12 +1,13 @@
 @model BurialListViewModel
-
 @{
+
+
     //ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
 <br />
-<partial name="searchPartialView" model=@Model.userSearch/>
+<partial name="searchPartialView" model=@Model.userSearch />
 <br />
 <p>
     <a asp-action="Create">Create New</a>
@@ -16,7 +17,7 @@
         <tr>
 
             <th>
-                Location
+                <button form="search" type="submit" class="btn btn-link" style="color: blue; text-decoration: underline; padding: 0; border: none; background-color: transparent;" asp-action="Index" asp-route-sortOrder="@ViewData["locationParam"]">Location</button>
             </th>
             <th>
                 ID
@@ -34,14 +35,21 @@
                 Hair Color
             </th>
             <th>
+                Age at Death
+            </th>
+            <th>
                 Textile Structure
             </th>
             <th>
                 Field Book Excavation Year
             </th>
             <th>
+                Face Bundles
+            </th>
+            <th>
                 Textile Function
             </th>
+
             <th>
                 Robust
             </th>
@@ -51,11 +59,14 @@
             <th>
                 Estimate Stature
             </th>
+            <th>
+                Text
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-    
+
         @foreach (var item in Model.displayBurial)
         {
             <tr>
@@ -78,10 +89,16 @@
                     @Html.DisplayFor(modelItem => item.hairColor)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.ageAtDeath)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.textileStructure)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.fieldBookExcavationYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.faceBundles)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.textileFunction)
@@ -95,8 +112,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.estimateStature)
                 </td>
-                
-                
+                <td>
+                    @Html.DisplayFor(modelItem => item.text)
+                </td>
+
+
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
@@ -106,3 +126,28 @@
         }
     </tbody>
 </table>
+@{
+    var prevDisabled = !Model.displayBurial.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.displayBurial.HasNextPage ? "disabled" : "";
+}
+
+<button asp-action="Index"
+   
+   asp-route-pageNumber="@(Model.displayBurial.PageIndex - 1)"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   form="search"
+   type="submit"
+   class="btn btn-default @prevDisabled">
+    Previous
+</button>
+<button asp-action="Index"
+   
+   asp-route-pageNumber="@(Model.displayBurial.PageIndex + 1)"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   form="search"
+   type="submit"
+   class="btn btn-default @nextDisabled">
+    Next
+</button>
+<p>@Model.displayBurial.PageIndex</p>
+<p>@Model.displayBurial.TotalPages</p>

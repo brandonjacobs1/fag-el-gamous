@@ -15,5 +15,7 @@ namespace fag_el_gamous.Models
         public string? Ply { get; set; }
         public int? Yarnmanipulationid { get; set; }
         public string? Direction { get; set; }
+
+        public List<YarnmanipulationTextile>? YarnmanipulationTextiles { get; set; }
     }
 }

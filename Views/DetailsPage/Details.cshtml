@@ -1,0 +1,35 @@
+@model AllLinkingTablesViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+<br />
+<partial name="PartialViews/Burialmain" model="@Model.BurialmainSingle.Burialmain" />
+<br />
+<partial name="PartialViews/Textiles" model="@Model.BurialmainTextile" />
+<br />
+
+<partial name="PartialViews/Analysis" model="@Model.AnalysisTextile" />
+<br />
+
+<partial name="PartialViews/Color" model="@Model.ColorTextile" />
+<br />
+
+<partial name="PartialViews/Decoration" model="@Model.DecorationTextile" />
+<br />
+
+<partial name="PartialViews/Dimension" model="@Model.DimensionTextile" />
+<br />
+
+<partial name="PartialViews/Textilefunction" model="@Model.TextilefunctionTextile" />
+<br />
+
+<partial name="PartialViews/Structure" model="@Model.StructureTextile" />
+<br />
+
+<partial name="PartialViews/Yarnmanipulation" model="@Model.YarnmanipulationTextile" />
+<br />
+<a asp-controller="Buriallist" asp-action="Index">Back to List</a>
+

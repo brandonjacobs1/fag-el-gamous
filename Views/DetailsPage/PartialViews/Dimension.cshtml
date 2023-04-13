@@ -1,0 +1,32 @@
+﻿@model List<DimensionTextile>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Dimension Information</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Dimension Type</th>
+                        <th>Value</th>
+                        <th>Dimension ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var d in Model)
+                    {
+                        <tr>
+                            <td>@d.Dimension.Id</td>
+                            <td>@d.Dimension.Dimensiontype</td>
+                            <td>@d.Dimension.Value</td>
+                            <td>@d.Dimension.Dimensionid</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
