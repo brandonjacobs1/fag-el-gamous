@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using fag_el_gamous.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,17 +16,19 @@ namespace fag_el_gamous.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IUserRoleStore<IdentityUser> _userRoleManager;
+        //private readonly IUserRoleStore<IdentityUser> _userRoleManager;
 
-        public AdminController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IUserRoleStore<IdentityUser> userRoleManager)
+        public AdminController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+            //IUserRoleStore<IdentityUser> userRoleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
-            _userRoleManager = userRoleManager;
+            //_userRoleManager = userRoleManager;
         }
 
 
         // GET: /<controller>/
+        [Authorize(Roles = "Admin")]
         public IActionResult Admin()
         {
             var users = _userManager.Users.ToList();
@@ -75,7 +78,7 @@ namespace fag_el_gamous.Controllers
                 var role = await _roleManager.FindByNameAsync(roleName);
                 if (user != null && role != null)
                 {
-                    await _userRoleManager.AddToRoleAsync(user, role.Name);
+                    await _userManager.AddToRoleAsync(user, role.Name);
                     return RedirectToAction("Admin");
                 }
                 else

@@ -35,8 +35,8 @@ builder.Services.AddScoped<DbContext>(provider => provider.GetService<Applicatio
 
 // Role-Based Authentication
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
 //builder.Services.AddIdentityCore<IdentityUser>()
@@ -58,6 +58,12 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredLength = 15;
     options.Password.RequiredUniqueChars = 6;
 });
+
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("RequireAdministratorRole",
+//        policy => policy.RequireRole("Admin"));
+//});
 
 var app = builder.Build();
 
