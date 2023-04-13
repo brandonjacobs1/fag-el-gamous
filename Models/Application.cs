@@ -8,7 +8,7 @@ namespace fag_el_gamous.Models
 	public class Application
 	{
         public List<IdentityRole> Roles { get; set; } = null!;
-        public List<IdentityUser> Users { get; set; } = null!;
+        public IdentityUser User { get; set; } = null!;
         public string NewRole { get; set; } = null!;
     }
 }
