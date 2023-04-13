@@ -13,6 +13,7 @@
     <None Remove="Views\BurialList\" />
     <None Remove="Views\Research\" />
     <None Remove="Views\TeamMember\" />
+    <None Remove="Views\DetailsPage\PartialViews\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
@@ -37,5 +38,6 @@
     <Folder Include="Views\BurialList\" />
     <Folder Include="Views\Research\" />
     <Folder Include="Views\TeamMember\" />
+    <Folder Include="Views\DetailsPage\PartialViews\" />
   </ItemGroup>
 </Project>

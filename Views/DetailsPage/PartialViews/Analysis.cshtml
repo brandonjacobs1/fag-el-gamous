@@ -1,0 +1,33 @@
+﻿@model List<AnalysisTextile>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Analysis Information</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Analysis Type</th>
+                        <th>Done By</th>
+                        <th>Analysis ID</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                    {
+                        <tr>
+                            <td>@m.Analysis.Id</td>
+                            <td>@m.Analysis.Analysistype</td>
+                            <td>@m.Analysis.Doneby</td>
+                            <td>@m.Analysis.Analysisid</td>
+                            <td>@m.Analysis.Date</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

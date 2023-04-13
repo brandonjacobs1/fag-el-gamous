@@ -14,5 +14,15 @@ namespace fag_el_gamous.Models
         public DateTime? Sampledate { get; set; }
         public DateTime? Photographeddate { get; set; }
         public string? Direction { get; set; }
+
+        public List<BurialmainTextile>? BurialmainTextiles { get; set; }
+        public List<AnalysisTextile>? AnalysisTextiles { get; set; }
+        public List<ColorTextile>? ColorTextiles { get; set; }
+        public List<DecorationTextile>? DecorationTextiles { get; set; }
+        public List<DimensionTextile>? DimensionTextiles { get; set; }
+        public List<TextilefunctionTextile>? TextilefunctionsTextiles { get; set; }
+        public List<StructureTextile>? StructureTextiles { get; set; }
+        public List<YarnmanipulationTextile>? YarnmanipulationTextiles { get; set; }
+        
     }
 }

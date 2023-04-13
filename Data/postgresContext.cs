@@ -95,7 +95,21 @@ namespace fag_el_gamous.Data
                 entity.Property(e => e.MainAnalysisid).HasColumnName("main$analysisid");
 
                 entity.Property(e => e.MainTextileid).HasColumnName("main$textileid");
+
+                entity.HasOne(d => d.Analysis)
+                    .WithMany(p => p.AnalysisTextiles)
+                    .HasForeignKey(d => d.MainAnalysisid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_main$analysis_textile_main$analysis");
+
+                entity.HasOne(d => d.Textile)
+                    .WithMany(p => p.AnalysisTextiles)
+                    .HasForeignKey(d => d.MainTextileid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_main$analysis_textile_main$textile");
             });
+
+            
 
             modelBuilder.Entity<Artifactfagelgamousregister>(entity =>
             {
@@ -638,6 +652,20 @@ namespace fag_el_gamous.Data
                 entity.Property(e => e.MainCraniumid).HasColumnName("main$craniumid");
             });
 
+            //modelBuilder.Entity<BurialmainTextile>(entity =>
+            //{
+            //    entity.HasKey(e => new { e.MainBurialmainid, e.MainTextileid })
+            //        .HasName("main$burialmain_textile_pkey");
+
+            //    entity.ToTable("burialmain_textile");
+
+            //    entity.HasIndex(e => new { e.MainTextileid, e.MainBurialmainid }, "idx_main$burialmain_textile_main$textile_main$burialmain");
+
+            //    entity.Property(e => e.MainBurialmainid).HasColumnName("main$burialmainid");
+
+            //    entity.Property(e => e.MainTextileid).HasColumnName("main$textileid");
+            //});
+
             modelBuilder.Entity<BurialmainTextile>(entity =>
             {
                 entity.HasKey(e => new { e.MainBurialmainid, e.MainTextileid })
@@ -650,58 +678,68 @@ namespace fag_el_gamous.Data
                 entity.Property(e => e.MainBurialmainid).HasColumnName("main$burialmainid");
 
                 entity.Property(e => e.MainTextileid).HasColumnName("main$textileid");
+
+                entity.HasOne(e => e.Burialmain)
+                      .WithMany(e => e.BurialmainTextiles)
+                      .HasForeignKey(e => e.MainBurialmainid);
+
+                entity.HasOne(e => e.Textile)
+                      .WithMany(e => e.BurialmainTextiles)
+                      .HasForeignKey(e => e.MainTextileid);
             });
+        
 
-            //modelBuilder.Entity<C14>(entity =>
-            //{
-            //    entity.ToTable("c14");
 
-              
+        //modelBuilder.Entity<C14>(entity =>
+        //{
+        //    entity.ToTable("c14");
 
-            //    entity.Property(e => e.Agebp).HasColumnName("agebp");
 
-            //    entity.Property(e => e.C14lab)
-            //        .HasMaxLength(200)
-            //        .HasColumnName("c14lab");
 
-            //    entity.Property(e => e.Calendardate).HasColumnName("calendardate");
+        //    entity.Property(e => e.Agebp).HasColumnName("agebp");
 
-            //    entity.Property(e => e.Calibrateddateavg).HasColumnName("calibrateddateavg");
+        //    entity.Property(e => e.C14lab)
+        //        .HasMaxLength(200)
+        //        .HasColumnName("c14lab");
 
-            //    entity.Property(e => e.Calibrateddatemax).HasColumnName("calibrateddatemax");
+        //    entity.Property(e => e.Calendardate).HasColumnName("calendardate");
 
-            //    entity.Property(e => e.Calibrateddatemin).HasColumnName("calibrateddatemin");
+        //    entity.Property(e => e.Calibrateddateavg).HasColumnName("calibrateddateavg");
 
-            //    entity.Property(e => e.Calibratedspan).HasColumnName("calibratedspan");
+        //    entity.Property(e => e.Calibrateddatemax).HasColumnName("calibrateddatemax");
 
-            //    entity.Property(e => e.Category)
-            //        .HasMaxLength(200)
-            //        .HasColumnName("category");
+        //    entity.Property(e => e.Calibrateddatemin).HasColumnName("calibrateddatemin");
 
-            //    entity.Property(e => e.Description)
-            //        .HasMaxLength(2000)
-            //        .HasColumnName("description");
+        //    entity.Property(e => e.Calibratedspan).HasColumnName("calibratedspan");
 
-            //    entity.Property(e => e.Foci)
-            //        .HasMaxLength(200)
-            //        .HasColumnName("foci");
+        //    entity.Property(e => e.Category)
+        //        .HasMaxLength(200)
+        //        .HasColumnName("category");
 
-            //    entity.Property(e => e.Location)
-            //        .HasMaxLength(2000)
-            //        .HasColumnName("location");
+        //    entity.Property(e => e.Description)
+        //        .HasMaxLength(2000)
+        //        .HasColumnName("description");
 
-            //    entity.Property(e => e.Questions)
-            //        .HasMaxLength(2000)
-            //        .HasColumnName("questions");
+        //    entity.Property(e => e.Foci)
+        //        .HasMaxLength(200)
+        //        .HasColumnName("foci");
 
-            //    entity.Property(e => e.Rack).HasColumnName("rack");
+        //    entity.Property(e => e.Location)
+        //        .HasMaxLength(2000)
+        //        .HasColumnName("location");
 
-            //    entity.Property(e => e.Size).HasColumnName("size");
+        //    entity.Property(e => e.Questions)
+        //        .HasMaxLength(2000)
+        //        .HasColumnName("questions");
 
-            //    entity.Property(e => e.Tubenumber).HasColumnName("tubenumber");
-            //});
+        //    entity.Property(e => e.Rack).HasColumnName("rack");
 
-            modelBuilder.Entity<Color>(entity =>
+        //    entity.Property(e => e.Size).HasColumnName("size");
+
+        //    entity.Property(e => e.Tubenumber).HasColumnName("tubenumber");
+        //});
+
+        modelBuilder.Entity<Color>(entity =>
             {
                 entity.ToTable("color");
 
@@ -728,6 +766,18 @@ namespace fag_el_gamous.Data
                 entity.Property(e => e.MainColorid).HasColumnName("main$colorid");
 
                 entity.Property(e => e.MainTextileid).HasColumnName("main$textileid");
+
+                entity.HasOne(d => d.Color)
+                    .WithMany(p => p.ColorTextiles)
+                    .HasForeignKey(d => d.MainColorid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_main$color_textile_main$color");
+
+                entity.HasOne(d => d.Textile)
+                    .WithMany(p => p.ColorTextiles)
+                    .HasForeignKey(d => d.MainTextileid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_main$color_textile_main$textile");
             });
 
             modelBuilder.Entity<Cranium>(entity =>
@@ -826,6 +876,18 @@ namespace fag_el_gamous.Data
                 entity.Property(e => e.MainDecorationid).HasColumnName("main$decorationid");
 
                 entity.Property(e => e.MainTextileid).HasColumnName("main$textileid");
+
+                entity.HasOne(d => d.Decoration)
+                    .WithMany(p => p.DecorationTextiles)
+                    .HasForeignKey(d => d.MainDecorationid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_main$decoration_textile_main$decoration");
+
+                entity.HasOne(d => d.Textile)
+                    .WithMany(p => p.DecorationTextiles)
+                    .HasForeignKey(d => d.MainTextileid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_main$decoration_textile_main$textile");
             });
 
             modelBuilder.Entity<Dimension>(entity =>
@@ -859,6 +921,18 @@ namespace fag_el_gamous.Data
                 entity.Property(e => e.MainDimensionid).HasColumnName("main$dimensionid");
 
                 entity.Property(e => e.MainTextileid).HasColumnName("main$textileid");
+
+                entity.HasOne(d => d.Dimension)
+                    .WithMany(p => p.DimensionTextiles)
+                    .HasForeignKey(d => d.MainDimensionid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_main$dimension_textile_main$dimension");
+
+                entity.HasOne(d => d.Textile)
+                    .WithMany(p => p.DimensionTextiles)
+                    .HasForeignKey(d => d.MainTextileid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_main$dimension_textile_main$textile");
             });
 
             modelBuilder.Entity<Newsarticle>(entity =>
@@ -1007,6 +1081,18 @@ namespace fag_el_gamous.Data
                 entity.Property(e => e.MainStructureid).HasColumnName("main$structureid");
 
                 entity.Property(e => e.MainTextileid).HasColumnName("main$textileid");
+
+                entity.HasOne(d => d.Structure)
+                    .WithMany(p => p.StructureTextiles)
+                    .HasForeignKey(d => d.MainStructureid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_main$structure_textile_main$structure");
+
+                entity.HasOne(d => d.Textile)
+                    .WithMany(p => p.StructureTextiles)
+                    .HasForeignKey(d => d.MainTextileid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_main$structure_textile_main$textile");
             });
 
             modelBuilder.Entity<Teammember>(entity =>
@@ -1092,6 +1178,18 @@ namespace fag_el_gamous.Data
                 entity.Property(e => e.MainTextilefunctionid).HasColumnName("main$textilefunctionid");
 
                 entity.Property(e => e.MainTextileid).HasColumnName("main$textileid");
+
+                entity.HasOne(d => d.Textilefunction)
+                    .WithMany(p => p.TextilefunctionTextiles)
+                    .HasForeignKey(d => d.MainTextilefunctionid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_main$textilefunction_textile_main$textilefunction");
+
+                entity.HasOne(d => d.Textile)
+                    .WithMany(p => p.TextilefunctionsTextiles)
+                    .HasForeignKey(d => d.MainTextileid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_main$textilefunction_textile_main$textile");
             });
 
             modelBuilder.Entity<Yarnmanipulation>(entity =>
@@ -1149,6 +1247,18 @@ namespace fag_el_gamous.Data
                 entity.Property(e => e.MainYarnmanipulationid).HasColumnName("main$yarnmanipulationid");
 
                 entity.Property(e => e.MainTextileid).HasColumnName("main$textileid");
+
+                entity.HasOne(d => d.Yarnmanipulation)
+                    .WithMany(p => p.YarnmanipulationTextiles)
+                    .HasForeignKey(d => d.MainYarnmanipulationid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_main$yarnmanipulation_textile_main$yarnmanipulation");
+
+                entity.HasOne(d => d.Textile)
+                    .WithMany(p => p.YarnmanipulationTextiles)
+                    .HasForeignKey(d => d.MainTextileid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_main$yarnmanipulation_textile_main$textile");
             });
 
             modelBuilder.Entity<C14>(entity =>

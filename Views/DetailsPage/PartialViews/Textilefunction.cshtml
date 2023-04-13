@@ -1,0 +1,29 @@
+﻿@model List<TextilefunctionTextile>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Textile Function Information</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Function Value</th>
+                        <th>Function ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                    {
+                        <tr>
+                            <td>@m.Textilefunction.Id</td>
+                            <td>@m.Textilefunction.Value</td>
+                            <td>@m.Textilefunction.Textilefunctionid</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

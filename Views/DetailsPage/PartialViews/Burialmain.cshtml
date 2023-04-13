@@ -1,0 +1,49 @@
+﻿@model Burialmain
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">Burial</h3>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Location</h5>
+                            <p class="card-text">@($"{Model.Squarenorthsouth}{Model.Northsouth} {Model.Squareeastwest}{Model.Eastwest} {Model.Area} #{Model.Burialnumber}")</p>
+                            <p class="card-text">West to Head: @Model.Westtohead</p>
+                            <p class="card-text">South to Head: @Model.Southtohead</p>
+                            <p class="card-text">Depth: @Model.Depth</p>
+                            <p class="card-text">Head Direction: @Model.Headdirection</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Mummy Classification</h5>
+                            <p class="card-text">Adult/Subadult: @Model.Adultsubadult</p>
+                            <p class="card-text">Sex: @Model.Sex</p>
+                            <p class="card-text">Text: @Model.Text</p>
+                            <p class="card-text">Face Bundles: @Model.Facebundles</p>
+                            <p class="card-text">Wrapping: @Model.Wrapping</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Additional Information</h5>
+                            <p class="card-text">Burial ID: @Model.Id</p>
+                            <p class="card-text">Goods: @Model.Goods</p>
+                            <p class="card-text">Preservation: @Model.Preservation</p>
+                            <p class="card-text">Fieldbook Page: @Model.Fieldbookpage</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

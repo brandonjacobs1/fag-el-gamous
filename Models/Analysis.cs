@@ -10,5 +10,7 @@ namespace fag_el_gamous.Models
         public string? Doneby { get; set; }
         public int? Analysisid { get; set; }
         public DateTime? Date { get; set; }
+
+        public List<AnalysisTextile>? AnalysisTextiles { get; set; }
     }
 }

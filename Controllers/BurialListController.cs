@@ -22,7 +22,7 @@ namespace fag_el_gamous.Controllers
             _context = context;
         }
         
-        public async Task<IActionResult> Index(int? pageNumber, string sortOrder, userSearch? search = null)
+        public async Task<IActionResult> Index(int? pageNumber, userSearch? search = null)
         {
             //ViewData["CurrentSort"] = sortOrder;
             //ViewData["locationParam"] = sortOrder == "locationString" ? "locationString_desc" : "locationString";
@@ -40,7 +40,7 @@ namespace fag_el_gamous.Controllers
             //ViewData["estimateStatureSortParm"] = sortOrder == "EstimateStature" ? "estimatestature_desc" : "EstimateStature";
 
 
-            var shortBurialList = _context.Detailscleaneddata;
+            var shortBurialList = _context.Burialmains;
             int pageSize = 10;
             var displayBurial = shortBurialList
                 .Select(x => new displayBurial
@@ -52,8 +52,8 @@ namespace fag_el_gamous.Controllers
                     Eastwest = x.Eastwest,
                     Area = x.Area,
                     ageAtDeath = x.Ageatdeath,
-                    burialNumber = x.BurialnumberX,
-                    depth = float.Parse(x.Depth),
+                    burialNumber = x.Burialnumber,
+                    depth = x.Depth != null ? float.Parse(x.Depth) : 0.0f,
                     hairColor = x.Haircolor,
                     headDirection = x.Headdirection,
                     faceBundles = x.Facebundles,
@@ -63,16 +63,17 @@ namespace fag_el_gamous.Controllers
                     //textileColor
                     //textileFunction = x.,
                     //textileStructure = x.,
-                    estimateStature = x.Estimatestature,
+                    //estimateStature = x.Estimatestature,
                 })
                 .Where(items =>
                     (string.IsNullOrEmpty(search.locationString) ||
-                         items.Squarenorthsouth.ToString() == search.locationString ||
+                         items.Squarenorthsouth == search.locationString ||
                          items.Northsouth == search.locationString ||
-                         items.Squareeastwest.ToString() == search.locationString ||
+                         items.Squareeastwest == search.locationString ||
                          items.Eastwest == search.locationString ||
                          items.burialNumber == search.locationString ||
-                         items.Area == search.locationString) && (search.sex == null || items.sex == search.sex)
+                         items.Area == search.locationString)
+                    && (search.sex == null || items.sex == search.sex)
                     && (search.minDepth == null || items.depth >= search.minDepth)
                     && (search.maxDepth == null || items.depth <= search.maxDepth)
                     && (search.ageAtDeath == null || items.ageAtDeath == search.ageAtDeath)
@@ -80,10 +81,10 @@ namespace fag_el_gamous.Controllers
                     && (search.headDirection == null || items.headDirection == search.headDirection)
                     //&& (search.textileFunction == null || items.textileFunction == search.textileFunction)
                     //&& (search.textileStructure == null || items.textileStructure == search.textileStructure)
-                    && (search.faceBundles == null || items.faceBundles == search.faceBundles)
-                    && (search.minEstimateStature == null || items.estimateStature >= search.minEstimateStature)
-                    && (search.maxEstimateStature == null || items.estimateStature <= search.maxEstimateStature)
-                    && (string.IsNullOrEmpty(search.text) || items.text.Contains(search.text))
+                    //&& (search.faceBundles == null || items.faceBundles == search.faceBundles)
+                    //&& (search.minEstimateStature == null || items.estimateStature >= search.minEstimateStature)
+                    //&& (search.maxEstimateStature == null || items.estimateStature <= search.maxEstimateStature)
+                    //&& (string.IsNullOrEmpty(search.text) || items.text.Contains(search.text))
                 );
 
             //switch (sortOrder)
@@ -164,9 +165,9 @@ namespace fag_el_gamous.Controllers
             //        displayBurial = displayBurial.OrderBy(s => s.locationString);
             //        break;
             //}
+            
 
-
-            var x = new BurialListViewModel {
+        var x = new BurialListViewModel {
                 displayBurial = await PaginatedList<displayBurial>.CreateAsync(displayBurial.AsNoTracking(), pageNumber ?? 1, pageSize),
                     userSearch = new userSearch
                     {
@@ -177,8 +178,8 @@ namespace fag_el_gamous.Controllers
                         ageAtDeath = search.ageAtDeath,
                         hairColor = search.hairColor,
                         headDirection = search.headDirection,
-                        //textileFunction = search.textileFunction,
-                        //textileStructure = search.textileStructure,
+                        textileFunction = search.textileFunction,
+                        textileStructure = search.textileStructure,
                         minEstimateStature = search.minEstimateStature,
                         maxEstimateStature = search.maxEstimateStature,
                         text = search.text
@@ -193,7 +194,7 @@ namespace fag_el_gamous.Controllers
         // Forward the details page to the cleaned data controller
         public async Task<IActionResult> Details(string id)
         {
-            return RedirectToAction("Details", "Detailscleaneddatum", new { id = id});
+            return RedirectToAction("Details", "DetailsPage", new { id = id});
         }
     }
 }
