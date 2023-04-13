@@ -1,49 +1,86 @@
 ﻿@model Burialmain
-
-<div class="container">
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title">Burial</h3>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Location</h5>
-                            <p class="card-text">@($"{Model.Squarenorthsouth}{Model.Northsouth} {Model.Squareeastwest}{Model.Eastwest} {Model.Area} #{Model.Burialnumber}")</p>
-                            <p class="card-text">West to Head: @Model.Westtohead</p>
-                            <p class="card-text">South to Head: @Model.Southtohead</p>
-                            <p class="card-text">Depth: @Model.Depth</p>
-                            <p class="card-text">Head Direction: @Model.Headdirection</p>
+    Id
+    Burialid
+    Dataexpertinitials
+    Dateofexcavation
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Location</h5>
+                                <p class="card-text">@($"{Model.Squarenorthsouth}{Model.Northsouth} {Model.Squareeastwest}{Model.Eastwest} {Model.Area} #{Model.Burialnumber}")</p>
+                                <div class="row">
+                                    <p class="card-text">Depth: @Model.Depth</p>
+                                    <p class="card-text">Length: @Model.Length</p>
+                                    <p class="card-text">Head Direction: @Model.Headdirection</p>
+                                    <div class="col-sm-6">
+                                        <p class="card-text">West to Head: @Model.Westtohead</p>
+                                        <p class="card-text">South to Head: @Model.Southtohead</p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="card-text">West to Feet: @Model.Westtofeet</p>
+                                        <p class="card-text">South to Feet: @Model.Southtofeet</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Mummy Classification</h5>
+                                <p class="card-text">Adult/Subadult: @Model.Adultsubadult</p>
+                                <p class="card-text">Sex: @Model.Sex</p>
+                                <p class="card-text">Description: @Model.Text</p>
+                                <p class="card-text">Face Bundles: @Model.Facebundles</p>
+                                <p class="card-text">Wrapping: @Model.Wrapping</p>
+                                <p class="card-text">Preservation: @Model.Preservation</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Mummy Classification</h5>
-                            <p class="card-text">Adult/Subadult: @Model.Adultsubadult</p>
-                            <p class="card-text">Sex: @Model.Sex</p>
-                            <p class="card-text">Text: @Model.Text</p>
-                            <p class="card-text">Face Bundles: @Model.Facebundles</p>
-                            <p class="card-text">Wrapping: @Model.Wrapping</p>
+            </div>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Physical Characteristics</h5>
+                                <p class="card-text">Age at Death: @Model.Ageatdeath</p>
+                                <p class="card-text">Hair: @Model.Hair</p>
+                                <p class="card-text">Hair Color: @Model.Haircolor</p>
+                                <p class="card-text">Samples Collected: @Model.Samplescollected</p>
+                                <p class="card-text">Burial Materials: @Model.Burialmaterials</p>
+                                <p class="card-text">Goods: @Model.Goods</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Additional Information</h5>
-                            <p class="card-text">Burial ID: @Model.Id</p>
-                            <p class="card-text">Goods: @Model.Goods</p>
-                            <p class="card-text">Preservation: @Model.Preservation</p>
-                            <p class="card-text">Fieldbook Page: @Model.Fieldbookpage</p>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Excavation and Field Book</h5>
+                                <p class="card-text">Excavation Date: @Model.Dateofexcavation</p>
+                                <p class="card-text">Excavation Recorder: @Model.Excavationrecorder</p>
+                                <p class="card-text">Field Book Excavation Year: @Model.Fieldbookexcavationyear</p>
+                                <p class="card-text">Cluster Number: @Model.Clusternumber</p>
+                                <p class="card-text">Shaft Number: @Model.Shaftnumber</p>
+                                <p class="card-text">Initials: @Model.Dataexpertinitials</p>
+                                <p class="card-text">Id: @Model.Id</p>
+                                <p class="card-text">Burial Id: @Model.Burialid</p>
+                                <p class="card-text">Photos: @Model.Photos</p>
+                                <p class="card-text">Fieldbook Page: @Model.Fieldbookpage</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 
 
 
