@@ -23,15 +23,16 @@ namespace fag_el_gamous.Views
         // GET: Detailscleaneddatum/Details/5
         public async Task<IActionResult> Details(string id)
         {
-            string bodyAnalysisId = "19140298416326114";
-            string Photoid = "19140298416326447";
-            id = Photoid;
+            //string bodyAnalysisId = "19140298416326114";
+            //string Photoid = "19140298416326447";
+            //id = Photoid;
             long ID = long.Parse(id);
 
             if (id == null || _context.BurialmainTextiles == null)
             {
                 return NotFound();
             }
+            var burialMainNoAssociation = await _context.Burialmains.Where(x => x.Id == ID).FirstOrDefaultAsync() ?? new Burialmain();
             
             var burialmainTextileSingle = await _context.BurialmainTextiles
                 .Include(p => p.Burialmain)
@@ -98,6 +99,7 @@ namespace fag_el_gamous.Views
             var bodyAnalysisChartViewModel = setBodyAnalysis(ID);
             var allData = new AllLinkingTablesViewModel
             {
+                BurialMainNoAssociation = burialMainNoAssociation,
                 BurialmainSingle = burialmainTextileSingle,
                 BurialmainTextile = burialmainTextile,
                 AnalysisTextile = analysisTextile,

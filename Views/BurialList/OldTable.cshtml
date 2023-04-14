@@ -49,17 +49,14 @@
                 </div>
             </div>
             <div class="row">
-
+                <h2 class="text-right">Textiles</h2>
                 <div class="col-md-4">
-                    <br />
-                    <br />
-                    <h2>Textile Color</h2>
                     <div class="card">
                         <div class="card-body">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        @*<th>ID</th>*@
                                         <th>Color</th>
                                     </tr>
                                 </thead>
@@ -69,7 +66,7 @@
                                         foreach (var textileColor in item.textileColor)
                                         {
                                             <tr>
-                                                <td>@item.LocationString</td>
+                                                @*<td>@item.LocationString</td>*@
                                                 <td>@textileColor.Color.Value</td>
 
                                             </tr>
@@ -80,17 +77,15 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-md-4">
-                    <br />
-                    <br />
-                    <h2>Textile Function</h2>
+
                     <div class="card">
                         <div class="card-body">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        @*<th>ID</th>*@
                                         <th>Function</th>
                                     </tr>
                                 </thead>
@@ -100,7 +95,7 @@
                                         foreach (var textileFunction in item.textileFunction)
                                         {
                                             <tr>
-                                                <td>@item.LocationString</td>
+                                                @*<td>@item.LocationString</td>*@
                                                 <td>@textileFunction.Textilefunction.Value</td>
 
                                             </tr>
@@ -111,18 +106,16 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-md-4">
-                    <br />
-                    <br />
-                    <h2>Textile Structure</h2>
+
                     <div class="card">
                         <div class="card-body">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Color</th>
+                                        @*<th>ID</th>*@
+                                        <th>Function</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -131,7 +124,7 @@
                                         foreach (var textileStructure in item.textileStructure)
                                         {
                                             <tr>
-                                                <td>@item.LocationString</td>
+                                                @*<td>@item.LocationString</td>*@
                                                 <td>@textileStructure.Structure.Value</td>
 
                                             </tr>
