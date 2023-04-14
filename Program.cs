@@ -13,6 +13,7 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 {
     options.CheckConsentNeeded = context => true;
     options.MinimumSameSitePolicy = SameSiteMode.None;
+    options.ConsentCookie.SecurePolicy = CookieSecurePolicy.Always;
 });
 
 // Add services to the container.
@@ -108,7 +109,7 @@ app.UseCookiePolicy();
 
 app.Use(async (context, next) =>
 {
-    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' https://ajax.googleapis.com 'unsafe-inline'; style-src 'self'; font-src 'self'; img-src 'self' cwadmin.byu.edu; frame-src 'self'");
+    context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' https://ajax.googleapis.com 'unsafe-inline'; style-src 'self'; font-src 'self'; img-src 'self' https://cwadmin.byu.edu; frame-src 'self'");
 
     await next();
 });
