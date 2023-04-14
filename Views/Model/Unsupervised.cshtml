@@ -1,0 +1,54 @@
+﻿<style>
+    .mainbody {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    img {
+        display: block;
+        margin: 0 auto;
+        height: 400px;
+    }
+
+    .box {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+</style>
+
+@{
+    ViewData["Title"] = "Unsupervised Models";
+}
+
+<h1 class="text-center">Unsupervised Models</h1>
+
+<div class="mainbody">
+    <div>
+        <div class="box text-center">
+            <img src="~/img/ageArea.png" />
+            <div class="text-center"><p>Depth AgeatDeath Area</p></div>
+        </div>
+
+        <div class="box text-center">
+            <img src="~/img/ageHead.png" />
+            <div class="text-center"><p>Depth AgeatDeath HeadDirection</p></div>
+        </div>
+    </div>
+
+    <div>
+        <div class="box text-center">
+            <img src="~/img/areaHead.png" />
+            <div class="text-center"><p>Depth Area HeadDirection</p></div>
+        </div>
+
+        <div class="box text-center">
+            <img src="~/img/areaSex.png" />
+            <div class="text-center"><p>Depth Area Sex</p></div>
+        </div>
+    </div>
+</div>
