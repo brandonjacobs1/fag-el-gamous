@@ -72,14 +72,17 @@
 
                 <button type="submit" class="text-center btn btn-secondary text-center">Predict</button>
             </form>
-            <br />
+            <br/>
 
-            @if (ViewBag.Hd != null)
-            {
-                <div class="text-center" role="alert">
-                    <h4 class="alert-heading mb-3">Head Direction: @ViewBag.Hd</h4>
-                </div>
-            }
+            <div>
+                <h2 style="font-family: 'Montserrat', sans-serif; font-size: 36px; font-weight: bold">
+                    Head Direction:
+                    @if (ViewBag.Hd != null)
+                    {
+                        <span style="color: #805804">@(ViewBag.Hd == "E" ? "East" : "West")</span>
+                    }
+                </h2>
+            </div>
         </div>
 
 
@@ -142,16 +145,16 @@
         </div>
     </div>
 </form>
-
-<!-- Display the result of the first API call -->
-            @if (ViewBag.Sex != null)
-            {
-                <div class="text-center" role="alert">
-                    <h4 class="alert-heading mb-3">Sex: @ViewBag.Sex</h4>
-                </div>
-            }
-<div/>
-
-    </div>
+<br/>
+            <div>
+                <h2 style="font-family: 'Montserrat', sans-serif; font-size: 36px; font-weight: bold">
+                    Sex:
+                    @if (ViewBag.Sex != null)
+                    {
+                        <span style="color: #805804">@(ViewBag.Sex == "F" ? "Female" : "Male")</span>
+                    }
+                </h2>
+            </div>
+           
 </div>
 
