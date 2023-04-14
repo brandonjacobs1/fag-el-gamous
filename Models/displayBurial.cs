@@ -13,28 +13,22 @@ namespace fag_el_gamous.Models
         public string? Squareeastwest { get; set; }
         public string? Eastwest { get; set; }
         public string? Area { get; set; }
-        public string? burialNumber { get; set; }
-        public string? locationString
+        public string? BurialNumber { get; set; }
+        public string? Text { get; set; }
+        public string? LocationString
         {
             get
             {
-                return $"{Squarenorthsouth}{Northsouth} {Squareeastwest}{Eastwest} {Area} #{burialNumber}";
+                return $"{Squarenorthsouth}{Northsouth} {Squareeastwest}{Eastwest} {Area} #{BurialNumber}";
             }
         }
-        public float? depth { get; set; }
-        public string? ageAtDeath { get; set; }
-        public string? hairColor { get; set; }
-        public string? fieldBookExcavationYear { get; set; }
-        public string? sex { get; set; }
-        public string? headDirection { get; set; }
-        public string? faceBundles { get; set; }
-
-
-        public string? textileColor { get; set; }
-        public string? textileStructure { get; set; }
-        public string? textileFunction { get; set; }
-        public decimal? estimateStature { get; set; }
-        public string? text { get; set; }
+        public float? Depth { get; set; }
+        public string? AgeAtDeath { get; set; }
+        public string? HairColor { get; set; }
+        public string? FieldBookExcavationYear { get; set; }
+        public string? Sex { get; set; }
+        public string? HeadDirection { get; set; }
+        public string? FaceBundles { get; set; }
 
     }
 }

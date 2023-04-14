@@ -11,6 +11,11 @@
     <partial name="PartialViews/Burialmain" model="@Model.BurialmainSingle.Burialmain" />
     <br />
 }
+else
+{
+    <partial name="PartialViews/Burialmain" model="@Model.BurialMainNoAssociation" />
+    <br />
+}
 
 <partial name="PartialViews/Textiles" model="@Model.BurialmainTextile" />
 <br />
@@ -39,9 +44,9 @@
 <partial name="PartialViews/Photodata" model="@Model.PhotodataTextile" />
 <br />
 @if (Model.BodyAnalysisViewModel != null)
-    {
+{
     <partial name="PartialViews/BodyAnalysis" model="@Model.BodyAnalysisViewModel" />
     <br />
-    }
-    <a asp-controller="Buriallist" asp-action="Index">Back to List</a>
+}
+<a asp-controller="Buriallist" asp-action="Index">Back to List</a>
 

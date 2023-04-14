@@ -29,6 +29,11 @@ namespace fag_el_gamous.Controllers
             return View();
         }
 
+        public IActionResult Unsupervised()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Sex(string eastwest, double depth, string haircolor, bool samplescollected, string ageatdeath, string wrapping)
         {

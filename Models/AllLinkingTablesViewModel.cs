@@ -3,6 +3,7 @@ namespace fag_el_gamous.Models
 {
 	public class AllLinkingTablesViewModel
 	{
+		public Burialmain? BurialMainNoAssociation { get; set; }
 		public BurialmainTextile? BurialmainSingle { get; set; }
 		public List<BurialmainTextile>? BurialmainTextile { get; set; }
 		public List<AnalysisTextile>? AnalysisTextile { get; set; }
