@@ -23,7 +23,9 @@ namespace fag_el_gamous.Views
         // GET: Detailscleaneddatum/Details/5
         public async Task<IActionResult> Details(string id)
         {
-            id = "19140298416326114";
+            string bodyAnalysisId = "19140298416326114";
+            string Photoid = "19140298416326447";
+            id = Photoid;
             long ID = long.Parse(id);
 
             if (id == null || _context.BurialmainTextiles == null)
