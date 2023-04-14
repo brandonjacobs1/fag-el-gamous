@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using fag_el_gamous.Data;
 using fag_el_gamous.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace fag_el_gamous.Views
 {
@@ -20,6 +21,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: YarnmanipulationTextile
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Index()
         {
               return _context.YarnmanipulationTextiles != null ? 
@@ -28,6 +30,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: YarnmanipulationTextile/Details/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null || _context.YarnmanipulationTextiles == null)
@@ -46,6 +49,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: YarnmanipulationTextile/Create
+        [Authorize(Roles = "Admin, Researcher")]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +58,7 @@ namespace fag_el_gamous.Views
         // POST: YarnmanipulationTextile/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MainYarnmanipulationid,MainTextileid")] YarnmanipulationTextile yarnmanipulationTextile)
@@ -68,6 +73,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: YarnmanipulationTextile/Edit/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null || _context.YarnmanipulationTextiles == null)
@@ -86,6 +92,7 @@ namespace fag_el_gamous.Views
         // POST: YarnmanipulationTextile/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("MainYarnmanipulationid,MainTextileid")] YarnmanipulationTextile yarnmanipulationTextile)
@@ -119,6 +126,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: YarnmanipulationTextile/Delete/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null || _context.YarnmanipulationTextiles == null)
@@ -137,6 +145,7 @@ namespace fag_el_gamous.Views
         }
 
         // POST: YarnmanipulationTextile/Delete/5
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
@@ -155,6 +164,7 @@ namespace fag_el_gamous.Views
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin, Researcher")]
         private bool YarnmanipulationTextileExists(long id)
         {
           return (_context.YarnmanipulationTextiles?.Any(e => e.MainYarnmanipulationid == id)).GetValueOrDefault();

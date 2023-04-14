@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using fag_el_gamous.Data;
 using fag_el_gamous.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace fag_el_gamous.Views
 {
@@ -20,6 +21,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: C14
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Index()
         {
               return _context.C14s != null ? 
@@ -28,6 +30,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: C14/Details/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.C14s == null)
@@ -46,6 +49,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: C14/Create
+        [Authorize(Roles = "Admin, Researcher")]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +58,7 @@ namespace fag_el_gamous.Views
         // POST: C14/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Sample,Squarenorthsouth,Northsouth,Squareeastwest,Eastwest,Area,Burialnumber,Description,Agebp,Calendardate")] C14 c14)
@@ -68,6 +73,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: C14/Edit/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.C14s == null)
@@ -86,6 +92,7 @@ namespace fag_el_gamous.Views
         // POST: C14/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Sample,Squarenorthsouth,Northsouth,Squareeastwest,Eastwest,Area,Burialnumber,Description,Agebp,Calendardate")] C14 c14)
@@ -119,6 +126,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: C14/Delete/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.C14s == null)
@@ -137,6 +145,7 @@ namespace fag_el_gamous.Views
         }
 
         // POST: C14/Delete/5
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -155,6 +164,7 @@ namespace fag_el_gamous.Views
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin, Researcher")]
         private bool C14Exists(int id)
         {
           return (_context.C14s?.Any(e => e.Sample == id)).GetValueOrDefault();

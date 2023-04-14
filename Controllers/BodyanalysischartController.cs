@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using fag_el_gamous.Data;
 using fag_el_gamous.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace fag_el_gamous.Views
 {
@@ -20,6 +21,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: Bodyanalysischart
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Index()
         {
               return _context.Bodyanalysischarts != null ? 
@@ -28,6 +30,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: Bodyanalysischart/Details/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Bodyanalysischarts == null)
@@ -46,6 +49,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: Bodyanalysischart/Create
+        [Authorize(Roles = "Admin, Researcher")]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +58,7 @@ namespace fag_el_gamous.Views
         // POST: Bodyanalysischart/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Key,Squarenorthsouth,Northsouth,Squareeastwest,Eastwest,Area,Burialnumber,Dateofexamination,Preservationindex,Haircolor,Observations,Robust,Supraorbitalridges,Orbitedge,Parietalbossing,Gonion,Nuchalcrest,Zygomaticcrest,Sphenooccipitalsynchrondrosis,Lamboidsuture,Squamossuture,Toothattrition,Tootheruption,Tootheruptionageestimate,Ventralarc,Subpubicangle,Sciaticnotch,Pubicbone,PreauricularsulcusBoolean,MedialIpRamus,DorsalpittingBoolean,Femur,Humerus,Femurheaddiameter,Humerusheaddiameter,Femurlength,Humeruslength,Estimatestature,Osteophytosis,CariesPeriodontalDisease,Notes")] Bodyanalysischart bodyanalysischart)
@@ -68,6 +73,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: Bodyanalysischart/Edit/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Bodyanalysischarts == null)
@@ -86,6 +92,7 @@ namespace fag_el_gamous.Views
         // POST: Bodyanalysischart/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Key,Squarenorthsouth,Northsouth,Squareeastwest,Eastwest,Area,Burialnumber,Dateofexamination,Preservationindex,Haircolor,Observations,Robust,Supraorbitalridges,Orbitedge,Parietalbossing,Gonion,Nuchalcrest,Zygomaticcrest,Sphenooccipitalsynchrondrosis,Lamboidsuture,Squamossuture,Toothattrition,Tootheruption,Tootheruptionageestimate,Ventralarc,Subpubicangle,Sciaticnotch,Pubicbone,PreauricularsulcusBoolean,MedialIpRamus,DorsalpittingBoolean,Femur,Humerus,Femurheaddiameter,Humerusheaddiameter,Femurlength,Humeruslength,Estimatestature,Osteophytosis,CariesPeriodontalDisease,Notes")] Bodyanalysischart bodyanalysischart)
@@ -119,6 +126,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: Bodyanalysischart/Delete/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Bodyanalysischarts == null)
@@ -137,6 +145,7 @@ namespace fag_el_gamous.Views
         }
 
         // POST: Bodyanalysischart/Delete/5
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

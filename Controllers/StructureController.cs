@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using fag_el_gamous.Data;
 using fag_el_gamous.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace fag_el_gamous.Views
 {
@@ -20,6 +21,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: Structure
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Index()
         {
               return _context.Structures != null ? 
@@ -28,6 +30,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: Structure/Details/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null || _context.Structures == null)
@@ -46,6 +49,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: Structure/Create
+        [Authorize(Roles = "Admin, Researcher")]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +58,7 @@ namespace fag_el_gamous.Views
         // POST: Structure/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Value,Structureid")] Structure structure)
@@ -68,6 +73,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: Structure/Edit/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null || _context.Structures == null)
@@ -86,6 +92,7 @@ namespace fag_el_gamous.Views
         // POST: Structure/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("Id,Value,Structureid")] Structure structure)
@@ -119,6 +126,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: Structure/Delete/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null || _context.Structures == null)
@@ -137,6 +145,7 @@ namespace fag_el_gamous.Views
         }
 
         // POST: Structure/Delete/5
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
@@ -155,6 +164,7 @@ namespace fag_el_gamous.Views
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin, Researcher")]
         private bool StructureExists(long id)
         {
           return (_context.Structures?.Any(e => e.Id == id)).GetValueOrDefault();

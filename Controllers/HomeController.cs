@@ -17,6 +17,7 @@ public class HomeController : Controller
         _context = context;
     }
 
+    // GET the Index page (landing page)
     [AllowAnonymous]
     public IActionResult Index()
     {
@@ -25,6 +26,7 @@ public class HomeController : Controller
         return View();
     }
 
+    // GET the Privacy Page
     [AllowAnonymous]
     public IActionResult Privacy()
     {
@@ -37,6 +39,7 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+    // GET the cookie policy page
     [AllowAnonymous]
     public IActionResult CookiePolicy()
     {

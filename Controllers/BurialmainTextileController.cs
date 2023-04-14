@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using fag_el_gamous.Data;
 using fag_el_gamous.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace fag_el_gamous.Views
 {
@@ -20,6 +21,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: BurialmainTextile
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Index()
         {
             var postgresContext = _context.BurialmainTextiles.Include(b => b.Burialmain).Include(b => b.Textile);
@@ -27,6 +29,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: BurialmainTextile/Details/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null || _context.BurialmainTextiles == null)
@@ -47,6 +50,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: BurialmainTextile/Create
+        [Authorize(Roles = "Admin, Researcher")]
         public IActionResult Create()
         {
             ViewData["MainBurialmainid"] = new SelectList(_context.Burialmains, "Id", "Id");
@@ -57,6 +61,7 @@ namespace fag_el_gamous.Views
         // POST: BurialmainTextile/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MainBurialmainid,MainTextileid")] BurialmainTextile burialmainTextile)
@@ -73,6 +78,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: BurialmainTextile/Edit/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null || _context.BurialmainTextiles == null)
@@ -93,6 +99,7 @@ namespace fag_el_gamous.Views
         // POST: BurialmainTextile/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("MainBurialmainid,MainTextileid")] BurialmainTextile burialmainTextile)
@@ -128,6 +135,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: BurialmainTextile/Delete/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null || _context.BurialmainTextiles == null)
@@ -148,6 +156,7 @@ namespace fag_el_gamous.Views
         }
 
         // POST: BurialmainTextile/Delete/5
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
@@ -166,6 +175,7 @@ namespace fag_el_gamous.Views
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin, Researcher")]
         private bool BurialmainTextileExists(long id)
         {
           return (_context.BurialmainTextiles?.Any(e => e.MainBurialmainid == id)).GetValueOrDefault();

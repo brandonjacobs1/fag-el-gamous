@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using fag_el_gamous.Data;
 using fag_el_gamous.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace fag_el_gamous.Views
 {
@@ -20,6 +21,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: TextilefunctionTextile
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Index()
         {
             var postgresContext = _context.TextilefunctionTextiles.Include(t => t.Textile).Include(t => t.Textilefunction);
@@ -27,6 +29,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: TextilefunctionTextile/Details/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Details(long? id)
         {
             if (id == null || _context.TextilefunctionTextiles == null)
@@ -47,6 +50,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: TextilefunctionTextile/Create
+        [Authorize(Roles = "Admin, Researcher")]
         public IActionResult Create()
         {
             ViewData["MainTextileid"] = new SelectList(_context.Textiles, "Id", "Id");
@@ -57,6 +61,7 @@ namespace fag_el_gamous.Views
         // POST: TextilefunctionTextile/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MainTextilefunctionid,MainTextileid")] TextilefunctionTextile textilefunctionTextile)
@@ -73,6 +78,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: TextilefunctionTextile/Edit/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Edit(long? id)
         {
             if (id == null || _context.TextilefunctionTextiles == null)
@@ -93,6 +99,7 @@ namespace fag_el_gamous.Views
         // POST: TextilefunctionTextile/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("MainTextilefunctionid,MainTextileid")] TextilefunctionTextile textilefunctionTextile)
@@ -128,6 +135,7 @@ namespace fag_el_gamous.Views
         }
 
         // GET: TextilefunctionTextile/Delete/5
+        [Authorize(Roles = "Admin, Researcher")]
         public async Task<IActionResult> Delete(long? id)
         {
             if (id == null || _context.TextilefunctionTextiles == null)
@@ -148,6 +156,7 @@ namespace fag_el_gamous.Views
         }
 
         // POST: TextilefunctionTextile/Delete/5
+        [Authorize(Roles = "Admin, Researcher")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(long id)
@@ -166,6 +175,7 @@ namespace fag_el_gamous.Views
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Admin, Researcher")]
         private bool TextilefunctionTextileExists(long id)
         {
           return (_context.TextilefunctionTextiles?.Any(e => e.MainTextilefunctionid == id)).GetValueOrDefault();

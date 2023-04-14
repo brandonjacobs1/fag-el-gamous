@@ -11,7 +11,6 @@ namespace fag_el_gamous.Controllers
 {
     public class ResearchController : Controller
     {
-        //[Authorize]
         // GET: /<controller>/
         [Authorize(Roles = "Researcher, Admin")]
         [HttpGet]
@@ -20,7 +19,7 @@ namespace fag_el_gamous.Controllers
             return View();
         }
 
-        //[Authorize]
+        // Handles POST requests from the research page, redirects to the specified request
         [Authorize(Roles = "Researcher, Admin")]
         [HttpPost]
         public IActionResult Research(string request)
