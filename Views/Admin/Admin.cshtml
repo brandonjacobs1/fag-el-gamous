@@ -6,8 +6,6 @@
 @model List<UserRolesView>
 
 <div class="text-center">
-    <h1>Admin Page</h1>
-
     <div class="row">
         <div class="col-2">
                 <a class="btn btn-success" asp-controller="Admin" asp-action="ManageRoles">Manage Roles</a>
@@ -16,6 +14,7 @@
                 <a class="btn btn-info" asp-controller="Admin" asp-action="ManageUsers">Manage Users</a>
         </div>
         <div class="col-10">
+            <h4>Manage User Roles</h4>
             <table class="table table-striped">
                     <thead>
                         <tr>
@@ -43,46 +42,6 @@
             </table>
         </div>
 
-        @*<div class="col-4">
-            <h3>Add a new role</h3>
-            <form asp-controller="Admin" asp-action="AddRole" method="post">
-                <label asp-for="@Model.FirstOrDefault().NewRole">New role name:</label>
-                <input asp-for="@Model.FirstOrDefault().NewRole" />
-                <button type="submit">Submit</button>
-            </form>
-        </div>*@
     </div>
-   
-
-    @*<h3>Add a new role</h3>*@
-    @*<form asp-controller="Admin" asp-action="AddRole" method="post">
-        <label asp-for="NewRole">New role name:</label>
-        <input asp-for="NewRole" />
-        <button type="submit">Submit</button>
-    </form>
-
-    <h3>Assign user to role</h3>
-   
-    <form asp-controller="Admin" asp-action="AddRoleToUser" method="post">
-        <label for="userId">Users:</label>
-        <select id="userId" name="userId">
-            @foreach (var user in Model.Users)
-            {
-                <option value="@user.Id">@user.Email</option>
-            }
-        </select>
-
-        <label for="roleName">Roles:</label>
-        <select id="roleName" name="roleName">
-            @foreach (var role in Model.Roles)
-            {
-                <option value="@role.Name">@role.Name</option>
-            }
-        </select>*@
-
-        @*<button type="submit">submit</button>
-
-    </form>*@
-
 
 </div>
