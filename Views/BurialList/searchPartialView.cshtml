@@ -26,11 +26,23 @@ The select options pull dynamically from the unique options in the database*@
     </div>
     <div class="form-group">
         <label asp-for="AgeAtDeath">Age At Death</label>
-        <input asp-for="AgeAtDeath" class="form-control" />
+        <select asp-for="AgeAtDeath" class="form-control">
+            <option value="" selected>--Select--</option>
+            @foreach (var age in Model.AgeList)
+            {
+                <option value="@age">@age</option>
+            }
+        </select>
     </div>
     <div class="form-group">
         <label asp-for="HairColor">Hair Color</label>
-        <input asp-for="HairColor" class="form-control" />
+        <select asp-for="HairColor" class="form-control">
+            <option value="" selected>--Select--</option>
+            @foreach (var hairColor in Model.HairColorList)
+            {
+                <option value="@hairColor">@hairColor</option>
+            }
+        </select>
     </div>
     <div class="form-group">
         <label asp-for="HeadDirection">Head Direction</label>
@@ -62,6 +74,17 @@ The select options pull dynamically from the unique options in the database*@
         <label asp-for="FieldBookExcavationYear">Field Book Excavation Year</label>
         <input asp-for="FieldBookExcavationYear" class="form-control" />
     </div>
-    <button type="submit" class="btn btn-primary">Search</button>
-    <button class="btn btn-primary" asp-action="Index">Return to Full List</button>
+    <div class="row">
+        <div class="pb-2">
+            <button type="submit" class="btn btn-primary d-block">Search</button>
+        </div>
+        <div class="">
+            <button class="btn btn-outline-primary d-block" asp-action="Index">Reset</button>
+        </div>
+        
+        
+            
+        
+    </div>
+
 </form>

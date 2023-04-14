@@ -27,6 +27,8 @@ namespace fag_el_gamous.Models
             public string? Text { get; set; }
             public string? FieldBookExcavationYear { get; set; }
 
+            public List<string?>? HairColorList { get; set; }
+            public List<string?>? AgeList { get; set; }
             public List<string?>? SexList { get; set; }
             public List<string?>? HeadDirectionList { get; set; }
             public List<SelectListItem>? TextileColorList { get; set; }

@@ -121,6 +121,8 @@ namespace fag_el_gamous.Controllers
                         TextileStructure = search.TextileStructure,
                         Text = search.Text,
 
+                        AgeList = await _context.Burialmains.Select(x => x.Ageatdeath).Distinct().ToListAsync(),
+                        HairColorList = await _context.Burialmains.Select(x => x.Haircolor).Distinct().ToListAsync(),
                         SexList = await _context.Burialmains.Select(x => x.Sex).Distinct().ToListAsync(),
                         HeadDirectionList = await _context.Burialmains.Select(x => x.Headdirection).Distinct().ToListAsync(),
                         TextileColorList = textileColorList.Select(c => new SelectListItem { Value = c.ToString(), Text = c.ToString() }).ToList(),
@@ -225,6 +227,8 @@ namespace fag_el_gamous.Controllers
                         TextileStructure = search.TextileStructure,
                         Text = search.Text,
 
+                        AgeList = await _context.Burialmains.Select(x => x.Ageatdeath).Distinct().ToListAsync(),
+                        HairColorList = await _context.Burialmains.Select(x => x.Haircolor).Distinct().ToListAsync(),
                         SexList = await _context.Burialmains.Select(x => x.Sex).Distinct().ToListAsync(),
                         HeadDirectionList = await _context.Burialmains.Select(x => x.Headdirection).Distinct().ToListAsync(),
                         TextileColorList = textileColorList.Select(c => new SelectListItem { Value = c.ToString(), Text = c.ToString() }).ToList(),
