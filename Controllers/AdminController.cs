@@ -46,6 +46,7 @@ namespace fag_el_gamous.Controllers
             return View(viewModel); 
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ManageUsers()
         {
             //var users = _userManager.Users.ToList();
@@ -69,6 +70,7 @@ namespace fag_el_gamous.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ManageRoles()
         {
             //var users = _userManager.Users.ToList();
@@ -92,7 +94,7 @@ namespace fag_el_gamous.Controllers
             return View(viewModel);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
@@ -121,7 +123,7 @@ namespace fag_el_gamous.Controllers
             return View(viewModel);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Delete(string? id, string? roleName)
         {
@@ -150,6 +152,7 @@ namespace fag_el_gamous.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> ConfirmRoleDelete(string roleName)
         {
@@ -171,7 +174,7 @@ namespace fag_el_gamous.Controllers
             return View(viewModel);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> ConfirmUserDelete(string id)
         {
@@ -193,7 +196,7 @@ namespace fag_el_gamous.Controllers
             return View(viewModel);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
@@ -220,6 +223,7 @@ namespace fag_el_gamous.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> EditUser(string id, string newEmail)
         {
@@ -247,7 +251,7 @@ namespace fag_el_gamous.Controllers
             return RedirectToAction("ManageUsers");
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string id)
         {
@@ -275,7 +279,7 @@ namespace fag_el_gamous.Controllers
 
 
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> AddRole(Application model)
         {
@@ -302,6 +306,7 @@ namespace fag_el_gamous.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> DeleteRole(string roleId)
         {
@@ -327,7 +332,7 @@ namespace fag_el_gamous.Controllers
             return RedirectToAction("ManageRoles");
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> AddRoleToUser(string userId, string roleName)
         {
@@ -348,6 +353,8 @@ namespace fag_el_gamous.Controllers
             return RedirectToAction("Admin");
         }
 
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> RemoveRoleFromUser(string userId, string roleName)
         {

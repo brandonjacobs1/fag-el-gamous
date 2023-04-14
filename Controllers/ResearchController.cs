@@ -13,6 +13,7 @@ namespace fag_el_gamous.Controllers
     {
         //[Authorize]
         // GET: /<controller>/
+        [Authorize(Roles = "Researcher, Admin")]
         [HttpGet]
         public IActionResult Research()
         {
@@ -20,6 +21,7 @@ namespace fag_el_gamous.Controllers
         }
 
         //[Authorize]
+        [Authorize(Roles = "Researcher, Admin")]
         [HttpPost]
         public IActionResult Research(string request)
         {
