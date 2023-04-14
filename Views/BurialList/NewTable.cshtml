@@ -15,6 +15,14 @@
     <div class="row justify-content-end pt-5">
         <div class="col-md-3">
             <partial name="searchPartialView" model="@Model.Search"></partial>
+            <div class="row">
+                <div class="pb-2">
+                    <button form="search" type="submit" class="btn btn-primary d-block">Search</button>
+                </div>
+                <div class="">
+                    <a class="btn btn-outline-primary" asp-action="Index">Reset</a>
+                </div>
+            </div>
         </div>
         <div class="col-md-9 m1-auto">
             <h2 class="text-right">Burials</h2>
