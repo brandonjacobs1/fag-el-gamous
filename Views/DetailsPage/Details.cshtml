@@ -1,3 +1,17 @@
+@*The main body of the view is composed of several partial views that are included using the partial tag helper.
+These partial views are Burialmain, Textiles, Analysis, Color, Decoration, Dimension, Textilefunction, Structure,
+Yarnmanipulation, Photodata, and BodyAnalysis. Each of these partial views is passed a specific model from the
+AllLinkingTablesViewModel view model.
+In the first conditional block, the Burialmain partial view is included with the Burialmain model if it is not null,
+otherwise the BurialMainNoAssociation model is passed. The remaining partial views are then included one by one with
+their respective models.
+The next conditional block includes the BodyAnalysis partial view only if the BodyAnalysisViewModel is not null.
+Finally, there is a link to go back to the list page of items.
+
+Each partial view is a view of a single table in the list
+    *@
+
+
 @model AllLinkingTablesViewModel
 
 @{
