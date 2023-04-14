@@ -6,15 +6,16 @@
 @model UserRolesView
 
     <h1>Delete page</h1>
-    <h3>Are you sure you want to remove the following role from @Model.User.Email</h3>
+    <h5>Are you sure you want to remove the following role from @Model.User.Email?</h5>
     <p>User: @Model.User.Email</p>
     <p>Role: @Model.NewRole</p>
 
     <form asp-controller="Admin" asp-action="RemoveRoleFromUser" method="post">
         <input type="hidden" name="userId" value="@Model.User.Id" />
         <input type="hidden" name="roleName" value="@Model.NewRole" />
-        <button type="submit">Confirm</button>
+        <button class="btn btn-danger" type="submit">Confirm</button>
     </form>
+    <a class="btn btn-info" asp-controller="Admin" asp-action="Edit" asp-route-id="@Model.User.Id">Cancel</a>
 
 
     @*<h1>Delete Role</h1>

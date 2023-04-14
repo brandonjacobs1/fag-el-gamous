@@ -38,11 +38,15 @@
             <select id="roleName" name="roleName">
                 <option></option>
                 @foreach (var role in Model.ListRoles)
-                    {
+                {
                     <option value="@role.Name">@role.Name</option>
-                    }
+                }
             </select>
+            <button class="btn btn-sm btn-info" type="submit">submit</button>
 
-          </form>
+        </form>
     </div>
 </div>
+<br />
+<br />
+    <a asp-controller="Admin" asp-action="Admin">Back to list</a>
