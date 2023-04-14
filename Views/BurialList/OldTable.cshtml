@@ -1,14 +1,25 @@
-﻿@model filterViewModel
+﻿@*This is a partial view written in Razor syntax for displaying burial information with pagination and search capabilities.
+The view displays a table with information about the burials, including location, age at death, depth, hair color,
+head direction, face bundles, year, sex, and a link to view more details about the burial.
+It also displays three tables containing information about textiles, including their color, function, and structure.
+The view has two buttons for navigating through the pages of the search results, and it displays the current page number
+and the total number of pages.
+
+This view represents the "inner join option" path of the code. The burial table shows all results, even those not
+associated with a textile
+*@
+
+@model filterViewModel
 
 
 
 <div class="container">
-    <div class="row justify-content-end">
+    <div class="row justify-content-end pt-5">
         <div class="col-md-3">
             <partial name="searchPartialView" model="@Model.Search"></partial>
         </div>
         <div class="col-md-9 m1-auto">
-            <h2 class="text-right">Burialmain</h2>
+            <h2 class="text-right">Burials</h2>
             <div class="card text-right">
                 <div class="card-body">
                     <div>
@@ -37,9 +48,10 @@
                                         <td>@item.HairColor</td>
                                         <td>@item.HeadDirection</td>
                                         <td>@item.FaceBundles</td>
-                                        <td>@item.FieldBookExcavationYear</td>
+                                        <td>@(item.FieldBookExcavationYear != null && item.FieldBookExcavationYear.Length >= 4 ? item.FieldBookExcavationYear.Substring(0, 4) : "")</td>
+
                                         <td>@item.Sex</td>
-                                        <td><a asp-action="Details" asp-route-id="@item.Id">Details</a></td>
+                                        <td><a asp-action="Details" asp-route-id="@item.Id">More</a></td>
                                         @*<td>@item.Text</td>*@
                                     </tr>
                                 }
@@ -49,7 +61,7 @@
                 </div>
             </div>
             <div class="row">
-                <h2 class="text-right">Textiles</h2>
+                <h2 class="text-right pt-5">Textiles</h2>
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
@@ -106,9 +118,7 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-4">
-
                     <div class="card">
                         <div class="card-body">
                             <table class="table table-striped">
@@ -147,7 +157,6 @@
                         asp-route-sortOrder="@ViewData["CurrentSort"]"
                         type="submit"
                         form="search"
-                        
                         class="btn btn-default @prevDisabled">
                     Previous
                 </button>
@@ -157,15 +166,14 @@
                         asp-route-sortOrder="@ViewData["CurrentSort"]"
                         type="submit"
                         form="search"
-                        
                         class="btn btn-default @nextDisabled">
                     Next
                 </button>
                 <p>Showing page @Model.displayBurial.PageIndex of @Model.displayBurial.TotalPages</p>
                 @*<p>@Model.displayBurial.PageIndex</p>
-                <p>@Model.displayBurial.TotalPages</p>*@
+                    <p>@Model.displayBurial.TotalPages</p>*@
             </div>
         </div>
-        </div>
     </div>
+</div>
 
