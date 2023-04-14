@@ -1,4 +1,7 @@
 ﻿@model Burialmain
+@*The burial information is organized into several sections, each displayed within a card element.
+The Model object contains information about each burial, including location,
+mummy classification, physical characteristics, and excavation details.*@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">Burial Information</h5>
@@ -9,7 +12,7 @@
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Location</h5>
+                                    <h6 class="card-title">Location</h6>
                                     <p class="card-text">@($"{Model.Squarenorthsouth}{Model.Northsouth} {Model.Squareeastwest}{Model.Eastwest} {Model.Area} #{Model.Burialnumber}")</p>
                                     <div class="row">
                                         <p class="card-text">Head Direction: @Model.Headdirection</p>
@@ -31,7 +34,7 @@
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Mummy Classification</h5>
+                                    <h6 class="card-title">Mummy Classification</h6>
                                     <p class="card-text">Adult/Subadult: @Model.Adultsubadult</p>
                                     <p class="card-text">Sex: @Model.Sex</p>
                                     <p class="card-text">Description: @Model.Text</p>
@@ -48,7 +51,7 @@
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Physical Characteristics</h5>
+                                    <h6 class="card-title">Physical Characteristics</h6>
                                     <p class="card-text">Age at Death: @Model.Ageatdeath</p>
                                     <p class="card-text">Hair: @Model.Hair</p>
                                     <p class="card-text">Hair Color: @Model.Haircolor</p>
@@ -61,7 +64,7 @@
                         <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Excavation and Field Book</h5>
+                                    <h6 class="card-title">Excavation and Field Book</h6>
                                     <p class="card-text">Excavation Date: @Model.Dateofexcavation</p>
                                     <p class="card-text">Excavation Recorder: @Model.Excavationrecorder</p>
                                     <p class="card-text">Field Book Excavation Year: @Model.Fieldbookexcavationyear</p>

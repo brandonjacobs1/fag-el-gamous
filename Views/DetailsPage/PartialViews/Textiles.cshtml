@@ -1,4 +1,6 @@
-﻿@model List<BurialmainTextile>
+﻿@*View for the Textile table*@
+
+@model List<BurialmainTextile>
 
 <div class="card">
     <div class="card-body">
@@ -22,7 +24,7 @@
                     @foreach (var m in Model)
                     {
                         <tr>
-                            
+
                             <td>@m.Textile.Id</td>
                             <td>@m.Textile.Locale</td>
                             <td>@m.Textile.Textileid</td>

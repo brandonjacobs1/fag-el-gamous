@@ -7,7 +7,7 @@
 
     <h1>Delete page</h1>
     <h3>Are you sure you want to remove the following role from @Model.User.Email</h3>
-    <p>User: @Model.User.Id</p>
+    <p>User: @Model.User.Email</p>
     <p>Role: @Model.NewRole</p>
 
     <form asp-controller="Admin" asp-action="RemoveRoleFromUser" method="post">

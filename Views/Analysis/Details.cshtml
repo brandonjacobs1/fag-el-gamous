@@ -1,0 +1,42 @@
+@model fag_el_gamous.Models.Analysis
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Analysis</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Analysistype)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Analysistype)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Doneby)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Doneby)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Analysisid)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Analysisid)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

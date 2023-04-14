@@ -1,47 +1,72 @@
+@*The main body of the view is composed of several partial views that are included using the partial tag helper.
+    These partial views are Burialmain, Textiles, Analysis, Color, Decoration, Dimension, Textilefunction, Structure,
+    Yarnmanipulation, Photodata, and BodyAnalysis. Each of these partial views is passed a specific model from the
+    AllLinkingTablesViewModel view model.
+    In the first conditional block, the Burialmain partial view is included with the Burialmain model if it is not null,
+    otherwise the BurialMainNoAssociation model is passed. The remaining partial views are then included one by one with
+    their respective models.
+    The next conditional block includes the BodyAnalysis partial view only if the BodyAnalysisViewModel is not null.
+    Finally, there is a link to go back to the list page of items.
+
+    Each partial view is a view of a single table in the list
+*@
+
+
 @model AllLinkingTablesViewModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-<br />
-@if (Model.BurialmainSingle.Burialmain != null)
-{
-    <partial name="PartialViews/Burialmain" model="@Model.BurialmainSingle.Burialmain" />
-    <br />
-}
+    
 
-<partial name="PartialViews/Textiles" model="@Model.BurialmainTextile" />
-<br />
+    <div class="pt-5">
+        <h1>Details</h1> 
+    </div>
+            
 
-<partial name="PartialViews/Analysis" model="@Model.AnalysisTextile" />
-<br />
+            <br />
+            @if (Model.BurialmainSingle.Burialmain != null)
+            {
+                <partial name="PartialViews/Burialmain" model="@Model.BurialmainSingle.Burialmain" />
+                <br />
+            }
+            else
+            {
+                <partial name="PartialViews/Burialmain" model="@Model.BurialMainNoAssociation" />
+                <br />
+            }
 
-<partial name="PartialViews/Color" model="@Model.ColorTextile" />
-<br />
+            <partial name="PartialViews/Textiles" model="@Model.BurialmainTextile" />
+            <br />
 
-<partial name="PartialViews/Decoration" model="@Model.DecorationTextile" />
-<br />
+            <partial name="PartialViews/Analysis" model="@Model.AnalysisTextile" />
+            <br />
 
-<partial name="PartialViews/Dimension" model="@Model.DimensionTextile" />
-<br />
+            <partial name="PartialViews/Color" model="@Model.ColorTextile" />
+            <br />
 
-<partial name="PartialViews/Textilefunction" model="@Model.TextilefunctionTextile" />
-<br />
+            <partial name="PartialViews/Decoration" model="@Model.DecorationTextile" />
+            <br />
 
-<partial name="PartialViews/Structure" model="@Model.StructureTextile" />
-<br />
+            <partial name="PartialViews/Dimension" model="@Model.DimensionTextile" />
+            <br />
 
-<partial name="PartialViews/Yarnmanipulation" model="@Model.YarnmanipulationTextile" />
-<br />
+            <partial name="PartialViews/Textilefunction" model="@Model.TextilefunctionTextile" />
+            <br />
 
-<partial name="PartialViews/Photodata" model="@Model.PhotodataTextile" />
-<br />
-@if (Model.BodyAnalysisViewModel != null)
-    {
-    <partial name="PartialViews/BodyAnalysis" model="@Model.BodyAnalysisViewModel" />
-    <br />
-    }
-    <a asp-controller="Buriallist" asp-action="Index">Back to List</a>
+            <partial name="PartialViews/Structure" model="@Model.StructureTextile" />
+            <br />
+
+            <partial name="PartialViews/Yarnmanipulation" model="@Model.YarnmanipulationTextile" />
+            <br />
+
+            <partial name="PartialViews/Photodata" model="@Model.PhotodataTextile" />
+            <br />
+            @if (Model.BodyAnalysisViewModel != null)
+            {
+                <partial name="PartialViews/BodyAnalysis" model="@Model.BodyAnalysisViewModel" />
+                <br />
+            }
+            <a class="btn btn-primary d-block" asp-controller="Buriallist" asp-action="Index">Back to List</a>
 

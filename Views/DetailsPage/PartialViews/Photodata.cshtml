@@ -1,4 +1,6 @@
-﻿@model List<PhotodataTextile>
+﻿@*View for the Photo table*@
+
+@model List<PhotodataTextile>
 
 <div class="card">
     <div class="card-body">
@@ -10,7 +12,8 @@
 
                     <img src="@image.Photodatum.Url" class="img-fluid" alt="@image.Photodatum.Description">
 
-                    <p>@image.Photodatum.Description - @image.Photodatum.Date</p>
+                    <p>@(image.Photodatum.Description == null ? $"{image.Photodatum.Description} - {image.Photodatum.Date}" : image.Photodatum.Date)</p>
+
                 </div>
             }
         </div>
