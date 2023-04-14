@@ -18,7 +18,7 @@
         </button>
     </div>
     <script type="text/javascript">
-        $(document).ready(function () {
+        @*$(document).ready(function () {
             console.log("jQuery loaded.");
             $("#cookieConsentdiv button[data-cookie-string]").bind("click", function () {
                 document.cookie = $("#cookieConsentdiv button").attr("data-cookie-string");
@@ -28,7 +28,27 @@
             $("#cookieOverlay").click(function () {
                 // Do nothing when the overlay is clicked
             });
-        });
+        });*@
+
+            $(document).ready(function () {
+                console.log("jQuery loaded.");
+
+                // Check if the current URL contains "CookiePolicy"
+                if (window.location.href.indexOf("CookiePolicy") > -1) {
+                    $("#cookieOverlay").addClass("no-cookie-banner");
+                }
+
+                $("#cookieConsentdiv button[data-cookie-string]").bind("click", function () {
+                    document.cookie = $("#cookieConsentdiv button").attr("data-cookie-string");
+                    $("#cookieConsentdiv").hide();
+                    $("#cookieOverlay").hide();
+                    $("body").removeClass("no-cookie-banner");
+                });
+
+                $("#cookieOverlay").click(function () {
+                    // Do nothing when the overlay is clicked
+                });
+            });
     </script>
 
 }
