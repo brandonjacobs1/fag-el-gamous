@@ -11,43 +11,38 @@ using static Humanizer.On;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Drawing.Printing;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+// This is a C# program file. It contains the definition of a controller class that handles HTTP requests related to a list of burials. 
+ 
+
 
 namespace fag_el_gamous.Controllers
 {
     public class BurialListController : Controller
     {
     private readonly postgresContext _context;
+        // In the constructor of the BurialListController class, an instance of the postgresContext class is injected, which is used for interacting with the database. 
 
         public BurialListController(postgresContext context)
         {
             _context = context;
         }
-        
+        // The Index method of the BurialListController class is an asynchronous method that handles HTTP GET requests for the burials list. 
+        // It has several optional parameters, including pageNumber, pageNumberFilter, pageNumberBurial, sortOrder, and search. 
+        // The Index method uses ViewData to store and pass data to the view, including the current sorting order.
         public async Task<IActionResult> Index(int? pageNumber, int? pageNumberFilter, int? pageNumberBurial, string sortOrder, userSearch? search = null)
         {
             ViewData["CurrentSort"] = sortOrder;
-            //ViewData["locationParam"] = sortOrder == "locationString" ? "locationString_desc" : "locationString";
-            //ViewData["IdSortParm"] = sortOrder == "Id" ? "id_desc" : "Id";
-            //ViewData["depthSortParm"] = sortOrder == "Depth" ? "depth_desc" : "Depth";
-            //ViewData["ageAtDeathSortParm"] = sortOrder == "AgeAtDeath" ? "ageatdeath_desc" : "AgeAtDeath";
-            //ViewData["hairColorSortParm"] = sortOrder == "HairColor" ? "haircolor_desc" : "HairColor";
-            //ViewData["fieldBookExcavationYearSortParm"] = sortOrder == "FieldBookExcavationYear" ? "fieldbookexcavationyear_desc" : "FieldBookExcavationYear";
-            //ViewData["sexSortParm"] = sortOrder == "Sex" ? "sex_desc" : "Sex";
-            //ViewData["headDirectionSortParm"] = sortOrder == "HeadDirection" ? "headdirection_desc" : "HeadDirection";
-            //ViewData["textileStructureSortParm"] = sortOrder == "TextileStructure" ? "textilestructure_desc" : "TextileStructure";
-            //ViewData["textileFunctionSortParm"] = sortOrder == "TextileFunction" ? "textilefunction_desc" : "TextileFunction";
-            //ViewData["RobustSortParm"] = sortOrder == "Robust" ? "robust_desc" : "Robust";
-            //ViewData["ParietalBlossingSortParm"] = sortOrder == "ParietalBlossing" ? "parietalblossing_desc" : "ParietalBlossing";
-            //ViewData["estimateStatureSortParm"] = sortOrder == "EstimateStature" ? "estimatestature_desc" : "EstimateStature";
+            // It also sets the default number of items to display per page to 6. 
+
             int pageSize = 6;
+            // If the search parameter has values for TextileColor, TextileFunction, or TextileStructure, it filters the burials list by these textile properties. 
 
             if (search.TextileColor != null || search.TextileFunction != null || search.TextileStructure != null)
             {
-                //Filter tables together
+                //Filter tables together. This code path works as in inner join when a filter is placed on one of the textile tables, only those burials with associalted textiles are returned
                 var burialmainTextile = _context.BurialmainTextiles.Include(x => x.Burialmain).Include(x => x.Textile);
 
-                var viewmodel = burialmainTextile
+                var viewmodel = burialmainTextile //Select all data for view model
                     .Select(x => new idknameyet
                     {
                         Id = x.Burialmain.Id,
@@ -65,28 +60,23 @@ namespace fag_el_gamous.Controllers
                         FieldBookExcavationYear = x.Burialmain.Fieldbookexcavationyear,
                         Sex = x.Burialmain.Sex,
                         Text = x.Burialmain.Text,
+                        //The tables have a many to many relationship so this gets only the associated rows of the entities
                         textileColor = _context.ColorTextiles
                             .Include(p => p.Textile)
                             .Include(p => p.Color)
-                            .Where(p => p.MainTextileid == x.MainTextileid) //&& (search.TextileColor == null || p.Color.Value.Contains(search.TextileColor)))
-                                                                            //.GroupBy(p => p.MainTextileid)
-                                                                            //.Select(g => g.First())
+                            .Where(p => p.MainTextileid == x.MainTextileid)                                              
                             .ToList(),
                         textileStructure = _context.StructureTextiles
                             .Include(p => p.Textile)
                             .Include(p => p.Structure)
-                            .Where(p => p.MainTextileid == x.MainTextileid) //&& (search.TextileStructure == null || search.TextileStructure.Count == 0 || search.TextileStructure.Contains(p.Structure.Value)))
-                                                                            //.GroupBy(p => p.MainTextileid)
-                                                                            //.Select(g => g.First())
+                            .Where(p => p.MainTextileid == x.MainTextileid)                                            
                             .ToList(),
                         textileFunction = _context.TextilefunctionTextiles
                             .Include(p => p.Textile)
                             .Include(p => p.Textilefunction)
-                            .Where(p => p.MainTextileid == x.MainTextileid) //&& (search.TextileFunction == null || search.TextileFunction.Count == 0 || search.TextileFunction.Contains(p.Textilefunction.Value)))
-                                                                            //.GroupBy(p => p.MainTextileid)
-                                                                            //.Select(g => g.First())
+                            .Where(p => p.MainTextileid == x.MainTextileid)                                               
                             .ToList()
-                    })
+                    }) //Filter results based on conditions received from user
                     .Where(items =>
                         (string.IsNullOrEmpty(search.LocationString) ||
                             items.Squarenorthsouth == search.LocationString ||
@@ -109,17 +99,15 @@ namespace fag_el_gamous.Controllers
                         (search.TextileStructure == null || items.textileStructure.Any(q => q.Structure.Value.Contains(search.TextileStructure)))
                         );
 
-
-                //var sexList = await _context.Burialmains.Select(x => x.Sex).Distinct().ToListAsync();
-                //var headDirectionList = await _context.Burialmains.Select(x => x.Headdirection).Distinct().ToListAsync();
                 var textileColorList = await _context.Colors.Select(x => x.Value).Distinct().ToListAsync();
                 var textileStructureList = await _context.Structures.Select(x => x.Value).Distinct().ToListAsync();
                 var textileFunctionList = await _context.Textilefunctions.Select(x => x.Value).Distinct().ToListAsync();
                 
                 var viewModel = new filterViewModel
                 {
+                    //Create the paginated list from the inputted models
                     displayBurial = await PaginatedList<idknameyet>.CreateAsync(viewmodel.AsNoTracking(), pageNumber ?? 1, pageSize),
-
+                    //set user search to the inputted values so they stay in the form on resubmission
                     Search = new userSearch
                     {
                         LocationString = search.LocationString,
@@ -131,13 +119,8 @@ namespace fag_el_gamous.Controllers
                         HeadDirection = search.HeadDirection,
                         TextileFunction = search.TextileFunction,
                         TextileStructure = search.TextileStructure,
-                        //MinEstimateStature = search.MinEstimateStature,
-                        //MaxEstimateStature = search.MaxEstimateStature,
                         Text = search.Text,
 
-
-                        //SexList = sexList.Select(s => new SelectListItem { Value = s, Text = s }).ToList(),
-                        //HeadList = headList.Select(h => new SelectListItem { Value = h, Text = h }).ToList(),
                         SexList = await _context.Burialmains.Select(x => x.Sex).Distinct().ToListAsync(),
                         HeadDirectionList = await _context.Burialmains.Select(x => x.Headdirection).Distinct().ToListAsync(),
                         TextileColorList = textileColorList.Select(c => new SelectListItem { Value = c.ToString(), Text = c.ToString() }).ToList(),
@@ -152,12 +135,10 @@ namespace fag_el_gamous.Controllers
 
             }
            
-
-
             else
             {
-                //Filter tables separate
-
+                //Filter tables separate. This view model functions as a left join where all burials are retuened whether or not they have a textile
+                //Select all data for view model
                 var burialmains = _context.Burialmains.Select(x => new displayBurial
                 {
                     Id = x.Id,
@@ -176,7 +157,7 @@ namespace fag_el_gamous.Controllers
                     Sex = x.Sex,
                     Text = x.Text,
 
-                })
+                })//Filter data accordingly
                 .Where(items =>
                     (string.IsNullOrEmpty(search.LocationString) ||
                         items.Squarenorthsouth == search.LocationString ||
@@ -199,34 +180,26 @@ namespace fag_el_gamous.Controllers
                 var textileColorList = await _context.Colors.Select(x => x.Value).Distinct().ToListAsync();
                 var textileStructureList = await _context.Structures.Select(x => x.Value).Distinct().ToListAsync();
                 var textileFunctionList = await _context.Textilefunctions.Select(x => x.Value).Distinct().ToListAsync();
-
-
-
                 var burialmainTextile = _context.BurialmainTextiles.Include(x => x.Burialmain).Include(x => x.Textile);
 
+                //Set individual tables that match with burials
                 var filterLinkingTables = burialmainTextile
                     .Select(x => new filterLinkingTables
                     {
                         textileColor = _context.ColorTextiles
                             .Include(p => p.Textile)
                             .Include(p => p.Color)
-                            .Where(p => p.MainTextileid == x.MainTextileid) //&& (search.TextileColor == null || p.Color.Value.Contains(search.TextileColor)))
-                                                                            //.GroupBy(p => p.MainTextileid)
-                                                                            //.Select(g => g.First())
+                            .Where(p => p.MainTextileid == x.MainTextileid)                                              
                             .ToList(),
                         textileStructure = _context.StructureTextiles
                             .Include(p => p.Textile)
                             .Include(p => p.Structure)
-                            .Where(p => p.MainTextileid == x.MainTextileid) //&& (search.TextileStructure == null || search.TextileStructure.Count == 0 || search.TextileStructure.Contains(p.Structure.Value)))
-                                                                            //.GroupBy(p => p.MainTextileid)
-                                                                            //.Select(g => g.First())
+                            .Where(p => p.MainTextileid == x.MainTextileid)                                               
                             .ToList(),
                         textileFunction = _context.TextilefunctionTextiles
                             .Include(p => p.Textile)
                             .Include(p => p.Textilefunction)
-                            .Where(p => p.MainTextileid == x.MainTextileid) //&& (search.TextileFunction == null || search.TextileFunction.Count == 0 || search.TextileFunction.Contains(p.Textilefunction.Value)))
-                                                                            //.GroupBy(p => p.MainTextileid)
-                                                                            //.Select(g => g.First())
+                            .Where(p => p.MainTextileid == x.MainTextileid)                                                
                             .ToList()
                     }).Where(items =>
                        (search.TextileColor == null || items.textileColor.Any(q => q.Color.Value.Contains(search.TextileColor))) &&
@@ -250,13 +223,8 @@ namespace fag_el_gamous.Controllers
                         HeadDirection = search.HeadDirection,
                         TextileFunction = search.TextileFunction,
                         TextileStructure = search.TextileStructure,
-                        //MinEstimateStature = search.MinEstimateStature,
-                        //MaxEstimateStature = search.MaxEstimateStature,
                         Text = search.Text,
 
-
-                        //SexList = sexList.Select(s => new SelectListItem { Value = s, Text = s }).ToList(),
-                        //HeadList = headList.Select(h => new SelectListItem { Value = h, Text = h }).ToList(),
                         SexList = await _context.Burialmains.Select(x => x.Sex).Distinct().ToListAsync(),
                         HeadDirectionList = await _context.Burialmains.Select(x => x.Headdirection).Distinct().ToListAsync(),
                         TextileColorList = textileColorList.Select(c => new SelectListItem { Value = c.ToString(), Text = c.ToString() }).ToList(),

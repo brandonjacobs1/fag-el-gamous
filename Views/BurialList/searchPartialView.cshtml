@@ -1,5 +1,6 @@
 ﻿@model userSearch
-
+@*This displays a form whre the user can enter the search criteria.
+The select options pull dynamically from the unique options in the database*@
 <form method="post" id="search">
     <div class="form-group">
         <label asp-for="LocationString">Location String</label>
@@ -8,7 +9,7 @@
     <div class="form-group">
         <label asp-for="Sex">Sex</label>
         <select asp-for="Sex" class="form-control">
-            <option value="">--Select--</option>
+            <option value="" selected>--Select--</option>
             @foreach (var sex in Model.SexList)
             {
                 <option value="@sex">@sex</option>
@@ -34,7 +35,7 @@
     <div class="form-group">
         <label asp-for="HeadDirection">Head Direction</label>
         <select asp-for="HeadDirection" class="form-control">
-            <option value="">--Select--</option>
+            <option value="" selected>--Select--</option>
             @foreach (var headDirection in Model.HeadDirectionList)
             {
                 <option value="@headDirection">@headDirection</option>
@@ -44,37 +45,10 @@
     <div class="form-group">
         <label asp-for="TextileColor">Textile Color</label>
         <input asp-for="TextileColor" class="form-control" />
-        @*<select asp-for="TextileColor" class="form-control">
-                <option value="">--Select--</option>
-                @foreach (var color in Model.TextileColorList)
-                {
-                    <option value="@color.Value">@color.Value</option>
-                }
-            </select>*@
-        @*<select asp-for="TextileColor" asp-items="@Model.TextileColorList" class="form-control" multiple size="1">
-            </select>*@
-    </div>
-    <div class="form-group">
-        <label asp-for="TextileStructure">Textile Structure</label>
-        <input asp-for="TextileStructure" class="form-control" />
-        @*<select asp-for="TextileStructure" class="form-control">
-                <option value="">--Select--</option>
-                @foreach (var structure in Model.TextileStructureList)
-                {
-                    <option value="@structure.Value">@structure.Value</option>
-                }
-            </select>*@
     </div>
     <div class="form-group">
         <label asp-for="TextileFunction">Textile Function</label>
         <input asp-for="TextileFunction" class="form-control" />
-        @*<select asp-for="TextileFunction" class="form-control">
-                <option value="">--Select--</option>
-                @foreach (var function in Model.TextileFunctionList)
-                {
-                    <option value="@function.Value">@function.Value</option>
-                }
-            </select>*@
     </div>
     <div class="form-group">
         <label asp-for="FaceBundles">Face Bundles</label>
