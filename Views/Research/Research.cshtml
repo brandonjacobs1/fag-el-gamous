@@ -3,21 +3,51 @@
 *@
 @{
 }
+<!--
+    This page is used to select a destination table,
+    and routes to the CRUD page of the selected table
+-->
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Researchers page for CRUD.</p>
-    <form method="post">
-        <label>Select a table to work with:</label>
-        <select name="request">
-            <option value="TeamMember">Team Member</option>
-            <option value="Yarnmanipulation">Yarn Manipulation</option>
-            <option value="Burialmain">Burial Main</option>
-            <option value="Decoration">Decoration</option>
-            <option value="Textile">Textile</option>
-            <option value="DecorationTextile">Decoration-Textile</option>
-        </select>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <h1 class="display-4">Researchers</h1>
+    <p>This page is used to direct you to any of the tables in the database.</p>
+    <p>You will be routed to a page where you can view all the data in the given table, as well as create, edit, and delete data.</p>
+
+    <div class="container">
+        <form method="post">
+            <br />
+            <label class="form-label mt-4">Select a table to work with:</label>
+            <br />
+            <select class="form" name="request">
+                <option selected>--Select--</option>
+                <option value="Analysis">Analysis</option>
+                <option value="Bodyanalysischart">Body Analysis Chart</option>
+                <option value="Book">Book</option>
+                <option value="Burialmain">Burial Main</option>
+                <option value="C14">C14</option>
+                <option value="Color">Color</option>
+                <option value="Decoration">Decoration</option>
+                <option value="Dimension">Dimension</option>
+                <option value="Photodatum">Photo Data</option>
+                <option value="Structure">Structure</option>
+                <option value="TeamMember">Team Member</option>
+                <option value="Textile">Textile</option>
+                <option value="Textilefunction">Textile Function</option>
+                <option value="Yarnmanipulation">Yarn Manipulation</option>
+                <option value="AnalysisTextile">Analysis-Textile</option>
+                <option value="BurialmainTextile">BurialMain-Textile</option>
+                <option value="ColorTextile">Color-Textile</option>
+                <option value="DecorationTextile">Decoration-Textile</option>
+                <option value="DimensionTextile">Dimension-Textile</option>
+                <option value="PhotodataTextile">PhotoData-Textile</option>
+                <option value="StructureTextile">Structure-Textile</option>
+                <option value="TextilefunctionTextile">Textilefunction-Textile</option>
+            </select>
+            <br />
+            <br />
+            <button type="submit" class="btn btn-sm btn-outline-dark">Submit</button>
+        </form>
+    </div>
     
 </div>
 
