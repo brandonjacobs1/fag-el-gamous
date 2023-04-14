@@ -92,10 +92,13 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+//app.MapControllerRoute(
+//    name: "burials",
+//    pattern: "{controller=BurialList}/{action=Index}/{pageNumber?}");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapRazorPages();
 
 app.Run();

@@ -1,0 +1,13 @@
+﻿@model List<PhotodataTextile>
+
+<div class="row">
+    @foreach (var image in Model)
+    {
+        <div class="col-sm-2">
+            
+            <img src="@image.Photodatum.Url" class="img-fluid" alt="@image.Photodatum.Description">
+            
+            <p>@image.Photodatum.Description - @image.Photodatum.Date</p>
+        </div>
+    }
+</div>

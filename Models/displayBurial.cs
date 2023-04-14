@@ -6,8 +6,8 @@ namespace fag_el_gamous.Models
 {
 	public class displayBurial
 	{
-		[Key]
-		public long? Id { get; set; }
+        [Key]
+        public long? Id { get; set; }
         public string? Squarenorthsouth { get; set; }
         public string? Northsouth { get; set; }
         public string? Squareeastwest { get; set; }
@@ -28,10 +28,11 @@ namespace fag_el_gamous.Models
         public string? sex { get; set; }
         public string? headDirection { get; set; }
         public string? faceBundles { get; set; }
+
+
+        public string? textileColor { get; set; }
         public string? textileStructure { get; set; }
         public string? textileFunction { get; set; }
-        public bool? Robust { get; set; }
-        public bool? ParietalBlossing { get; set; }
         public decimal? estimateStature { get; set; }
         public string? text { get; set; }
 

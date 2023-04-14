@@ -11,5 +11,8 @@ namespace fag_el_gamous.Models
         public int? Photodataid { get; set; }
         public DateTime? Date { get; set; }
         public string? Url { get; set; }
+
+        public List<PhotodataTextile>? photodataTextiles { get; set; }
+
     }
 }

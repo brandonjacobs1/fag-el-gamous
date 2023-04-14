@@ -23,6 +23,7 @@ namespace fag_el_gamous.Models
         public List<TextilefunctionTextile>? TextilefunctionsTextiles { get; set; }
         public List<StructureTextile>? StructureTextiles { get; set; }
         public List<YarnmanipulationTextile>? YarnmanipulationTextiles { get; set; }
+        public List<PhotodataTextile>? photodataTextiles { get; set; }
         
     }
 }

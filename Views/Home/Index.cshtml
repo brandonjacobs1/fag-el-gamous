@@ -1,8 +1,84 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model filterViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@*<h1>Burial Data</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Squarenorthsouth</th>
+            <th>Northsouth</th>
+            <th>Squareeastwest</th>
+            <th>Eastwest</th>
+            <th>Area</th>
+            <th>ageAtDeath</th>
+            <th>burialNumber</th>
+            <th>depth</th>
+            <th>hairColor</th>
+            <th>headDirection</th>
+            <th>faceBundles</th>
+            <th>fieldBookExcavationYear</th>
+            <th>sex</th>
+            <th>text</th>
+            <th>textileColor</th>
+            <th>textileStructure</th>
+            <th>textileFunction</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var burial in Model.displayBurial)
+        {
+            <tr>
+                <td>@burial.Id</td>
+                <td>@burial.Squarenorthsouth</td>
+                <td>@burial.Northsouth</td>
+                <td>@burial.Squareeastwest</td>
+                <td>@burial.Eastwest</td>
+                <td>@burial.Area</td>
+                <td>@burial.AgeAtDeath</td>
+                <td>@burial.BurialNumber</td>
+                <td>@burial.Depth</td>
+                <td>@burial.HairColor</td>
+                <td>@burial.HeadDirection</td>
+                <td>@burial.FaceBundles</td>
+                <td>@burial.FieldBookExcavationYear</td>
+                <td>@burial.Sex</td>
+                <td>@burial.Text</td>
+                <td>
+                    @foreach (var color in burial.textileColor)
+                    {
+                        <span>@color.Color.Value</span>
+                        if (color != burial.textileColor.Last())
+                        {
+                            <span>, </span>
+                        }
+                    }
+                </td>
+                <td>
+                    @foreach (var structure in burial.textileStructure)
+                    {
+                        <span>@structure.Structure.Value</span>
+                        if (structure != burial.textileStructure.Last())
+                        {
+                            <span>, </span>
+                        }
+                    }
+                </td>
+                <td>
+                    @foreach (var function in burial.textileFunction)
+                    {
+                        <span>@function.Textilefunction.Value</span>
+                        if (function != burial.textileFunction.Last())
+                        {
+                            <span>, </span>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>*@
+

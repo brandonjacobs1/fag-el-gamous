@@ -1,8 +1,4 @@
 ﻿@model Burialmain
-    Id
-    Burialid
-    Dataexpertinitials
-    Dateofexcavation
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
@@ -13,14 +9,14 @@
                                 <h5 class="card-title">Location</h5>
                                 <p class="card-text">@($"{Model.Squarenorthsouth}{Model.Northsouth} {Model.Squareeastwest}{Model.Eastwest} {Model.Area} #{Model.Burialnumber}")</p>
                                 <div class="row">
-                                    <p class="card-text">Depth: @Model.Depth</p>
-                                    <p class="card-text">Length: @Model.Length</p>
                                     <p class="card-text">Head Direction: @Model.Headdirection</p>
                                     <div class="col-sm-6">
+                                        <p class="card-text">Depth: @Model.Depth</p>
                                         <p class="card-text">West to Head: @Model.Westtohead</p>
                                         <p class="card-text">South to Head: @Model.Southtohead</p>
                                     </div>
                                     <div class="col-sm-6">
+                                        <p class="card-text">Length: @Model.Length</p>
                                         <p class="card-text">West to Feet: @Model.Westtofeet</p>
                                         <p class="card-text">South to Feet: @Model.Southtofeet</p>
                                     </div>
