@@ -30,21 +30,68 @@ namespace fag_el_gamous.Controllers
         public async Task<IActionResult> Admin()
         {
             var users = _userManager.Users.ToList();
-            var viewModel = new List<UserRolesView>(); // Create a list to hold the view model objects
+            var viewModel = new List<UserRolesView>(); 
 
             foreach (var user in users)
             {
-                var userRoles = await _userManager.GetRolesAsync(user); // Get the roles for the current user
+                var userRoles = await _userManager.GetRolesAsync(user); 
                 var userRoleViewModel = new UserRolesView
                 {
                     User = user,
                     Roles = userRoles
                 };
-                viewModel.Add(userRoleViewModel); // Add the view model object to the list
+                viewModel.Add(userRoleViewModel); 
             }
 
-            return View(viewModel); // Pass the list of view models to the view
+            return View(viewModel); 
         }
+
+        public async Task<IActionResult> ManageUsers()
+        {
+            //var users = _userManager.Users.ToList();
+            var users = _userManager.Users.ToList();
+            //var viewModel = new List<UserRolesView>();
+
+            //foreach (var user in users)
+            //{
+            //    var userRoles = await _userManager.GetRolesAsync(user);
+            //    var userRoleViewModel = new UserRolesView
+            //    {
+            //        User = user,
+            //        Roles = userRoles
+            //    };
+            //    viewModel.Add(userRoleViewModel);
+            var viewModel = new UserRolesView
+            {
+                ListUsers = users
+            };
+
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> ManageRoles()
+        {
+            //var users = _userManager.Users.ToList();
+            var roles = _roleManager.Roles.ToList();
+            //var viewModel = new List<UserRolesView>();
+
+            //foreach (var user in users)
+            //{
+            //    var userRoles = await _userManager.GetRolesAsync(user);
+            //    var userRoleViewModel = new UserRolesView
+            //    {
+            //        User = user,
+            //        Roles = userRoles
+            //    };
+            //    viewModel.Add(userRoleViewModel);
+            var viewModel = new UserRolesView
+            {
+                ListRoles = roles
+            };
+
+            return View(viewModel);
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
@@ -56,14 +103,15 @@ namespace fag_el_gamous.Controllers
 
             var user = await _userManager.FindByIdAsync(id);
             var roles = _roleManager.Roles.ToList();
-            var userRoles = await _userManager.GetRolesAsync(user); // Get the roles for the current user
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var newRoles = roles.Where(role => !userRoles.Contains(role.Name)).ToList();
             
 
             var viewModel = new UserRolesView
             {
                 Roles = userRoles,
                 User = user,
-                ListRoles = roles
+                ListRoles = newRoles
             };
 
             if (user == null)
@@ -72,10 +120,62 @@ namespace fag_el_gamous.Controllers
             }
             return View(viewModel);
         }
+
+
         [HttpGet]
-        public async Task<IActionResult> Delete(string id, string roleName)
+        public async Task<IActionResult> Delete(string? id, string? roleName)
         {
-            if (id == null || _userManager.Users == null)
+            if (id == null && _userManager.Users == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+            var role = await _roleManager.FindByNameAsync(roleName);
+            //var role = _roleManager.FindByNameAsync(roleName);
+            //var userRoles = await _userManager.GetRolesAsync(user); // Get the roles for the current user
+
+
+            var viewModel = new UserRolesView
+            {
+                User = user,
+                NewRole = roleName,
+                SingleRole = role
+            };
+
+            //if (user == null)
+            //{
+            //    return NotFound();
+            //}
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmRoleDelete(string roleName)
+        {
+            if (roleName == null)
+            {
+                return NotFound();
+            }
+
+            var role = await _roleManager.FindByNameAsync(roleName);
+            //var role = _roleManager.FindByNameAsync(roleName);
+            //var userRoles = await _userManager.GetRolesAsync(user); // Get the roles for the current user
+
+
+            var viewModel = new UserRolesView
+            {
+                SingleRole = role
+            };
+
+            return View(viewModel);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmUserDelete(string id)
+        {
+            if (id == null)
             {
                 return NotFound();
             }
@@ -87,16 +187,92 @@ namespace fag_el_gamous.Controllers
 
             var viewModel = new UserRolesView
             {
-                User = user,
-                NewRole = roleName
+                User = user
             };
 
-            if (user == null)
+            return View(viewModel);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            if (id == null)
             {
                 return NotFound();
             }
+
+            var user = await _userManager.FindByIdAsync(id);
+
+            //var role = _roleManager.FindByNameAsync(roleName);
+            //var userRoles = await _userManager.GetRolesAsync(user); // Get the roles for the current user
+
+
+            var viewModel = new UserRolesView
+            {
+                User = user
+            };
+
+            //if (user == null)
+            //{
+            //    return NotFound();
+            //}
             return View(viewModel);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(string id, string newEmail)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+
+            var token = await _userManager.GenerateChangeEmailTokenAsync(user, newEmail);
+
+            await _userManager.ChangeEmailAsync(user, newEmail, token);
+
+            //var role = _roleManager.FindByNameAsync(roleName);
+            //var userRoles = await _userManager.GetRolesAsync(user); // Get the roles for the current user
+
+
+            var viewModel = new UserRolesView
+            {
+                User = user
+            };
+
+            
+            return RedirectToAction("ManageUsers");
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            if (id != null)
+            {
+                //var role = new IdentityRole
+                //{
+                //    Name = model.
+                //};
+                var user = await _userManager.FindByIdAsync(id);
+                var result = await _userManager.DeleteAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ManageUsers");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "failed to add role");
+                }
+            }
+
+            return RedirectToAction("ManageUsers");
+        }
+
 
 
         [HttpPost]
@@ -113,7 +289,7 @@ namespace fag_el_gamous.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Admin");
+                    return RedirectToAction("ManageRoles");
                 }
                 else
                 {
@@ -121,7 +297,33 @@ namespace fag_el_gamous.Controllers
                 }
             }
 
-            return RedirectToAction("Admin");
+            return RedirectToAction("ManageRoles");
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(string roleId)
+        {
+            if (roleId != null)
+            {
+                //var role = new IdentityRole
+                //{
+                //    Name = model.
+                //};
+                var role = await _roleManager.FindByIdAsync(roleId);
+                var result = await _roleManager.DeleteAsync(role);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ManageRoles");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "failed to add role");
+                }
+            }
+
+            return RedirectToAction("ManageRoles");
         }
 
 
