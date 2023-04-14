@@ -16,11 +16,24 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 });
 
 // Add services to the container.
-//SQLLite db connection
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+//Identity db connection
+
+string identityConnectionString;
+var identityRequest = new GetParameterRequest()
+{
+    Name = "identityConnectionString"
+};
+using (var client = new AmazonSimpleSystemsManagementClient(Amazon.RegionEndpoint.GetBySystemName("us-east-1")))
+{
+    var resp = client.GetParameterAsync(identityRequest).GetAwaiter().GetResult();
+    identityConnectionString = resp.Parameter.Value;
+}
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(connectionString));
+    options.UseNpgsql(identityConnectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
 
 //Postgres db Connection
 string postgresConnectionString;
@@ -43,10 +56,16 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 // Role-Based Authentication
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddRoles<IdentityRole>();
+    .AddDefaultTokenProviders();
+
+//builder.Services.AddIdentityCore<IdentityUser>()
+//    .AddRoleManager<IdentityRole>()
+//    .AddUserManager<IdentityUser>();
 
 builder.Services.AddScoped<IRoleStore<IdentityRole>, RoleStore<IdentityRole>>();
+//builder.Services.AddScoped<IUserRoleStore<IdentityUser>, CustomUserRoleStore>();
 
 builder.Services.AddControllersWithViews();
 
@@ -60,6 +79,12 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredLength = 15;
     options.Password.RequiredUniqueChars = 6;
 });
+
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("RequireAdministratorRole",
+//        policy => policy.RequireRole("Admin"));
+//});
 
 var app = builder.Build();
 

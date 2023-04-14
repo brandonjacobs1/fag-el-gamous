@@ -1,0 +1,17 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model UserRolesView
+
+<h1>Delete page</h1>
+<h3>Are you sure you want to remove the following role from @Model.User.Email</h3>
+<p>User: @Model.User.Id</p>
+<p>Role: @Model.NewRole</p>
+
+<form asp-controller="Admin" asp-action="RemoveRoleFromUser" method="post" >
+    <input type="hidden" name="userId" value="@Model.User.Id" />
+    <input type="hidden" name="roleName" value="@Model.NewRole" />
+    <button type="submit">Confirm</button>
+</form>
