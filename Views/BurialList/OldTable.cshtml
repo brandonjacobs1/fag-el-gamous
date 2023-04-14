@@ -1,0 +1,178 @@
+﻿@model filterViewModel
+
+
+
+<div class="container">
+    <div class="row justify-content-end">
+        <div class="col-md-3">
+            <partial name="searchPartialView" model="@Model.Search"></partial>
+        </div>
+        <div class="col-md-9 m1-auto">
+            <h2 class="text-right">Burialmain</h2>
+            <div class="card text-right">
+                <div class="card-body">
+                    <div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Location</th>
+                                    <th>Age</th>
+                                    <th>Depth</th>
+                                    <th>Hair Color</th>
+                                    <th>Head Direction</th>
+                                    <th>Face Bundles</th>
+                                    <th>Year</th>
+                                    <th>Sex</th>
+                                    <th></th>
+                                    @*<th>Text</th>*@
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.displayBurial)
+                                {
+                                    <tr>
+                                        <td>@item.LocationString</td>
+                                        <td>@item.AgeAtDeath</td>
+                                        <td>@item.Depth</td>
+                                        <td>@item.HairColor</td>
+                                        <td>@item.HeadDirection</td>
+                                        <td>@item.FaceBundles</td>
+                                        <td>@item.FieldBookExcavationYear</td>
+                                        <td>@item.Sex</td>
+                                        <td><a asp-action="Details" asp-route-id="@item.Id">Details</a></td>
+                                        @*<td>@item.Text</td>*@
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-4">
+                    <br />
+                    <br />
+                    <h2>Textile Color</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Color</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.displayBurial)
+                                    {
+                                        foreach (var textileColor in item.textileColor)
+                                        {
+                                            <tr>
+                                                <td>@item.LocationString</td>
+                                                <td>@textileColor.Color.Value</td>
+
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <br />
+                    <br />
+                    <h2>Textile Function</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Function</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.displayBurial)
+                                    {
+                                        foreach (var textileFunction in item.textileFunction)
+                                        {
+                                            <tr>
+                                                <td>@item.LocationString</td>
+                                                <td>@textileFunction.Textilefunction.Value</td>
+
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <br />
+                    <br />
+                    <h2>Textile Structure</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Color</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.displayBurial)
+                                    {
+                                        foreach (var textileStructure in item.textileStructure)
+                                        {
+                                            <tr>
+                                                <td>@item.LocationString</td>
+                                                <td>@textileStructure.Structure.Value</td>
+
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                @{
+                    var prevDisabled = !Model.displayBurial.HasPreviousPage ? "disabled" : "";
+                    var nextDisabled = !Model.displayBurial.HasNextPage ? "disabled" : "";
+                }
+                <button asp-controller="BurialList"
+                        asp-action="Index"
+                        asp-route-pageNumber="@(Model.displayBurial.PageIndex - 1)"
+                        asp-route-sortOrder="@ViewData["CurrentSort"]"
+                        type="submit"
+                        form="search"
+                        
+                        class="btn btn-default @prevDisabled">
+                    Previous
+                </button>
+                <button asp-controller="BurialList"
+                        asp-action="Index"
+                        asp-route-pageNumber="@(Model.displayBurial.PageIndex + 1)"
+                        asp-route-sortOrder="@ViewData["CurrentSort"]"
+                        type="submit"
+                        form="search"
+                        
+                        class="btn btn-default @nextDisabled">
+                    Next
+                </button>
+                <p>Showing page @Model.displayBurial.PageIndex of @Model.displayBurial.TotalPages</p>
+                @*<p>@Model.displayBurial.PageIndex</p>
+                <p>@Model.displayBurial.TotalPages</p>*@
+            </div>
+        </div>
+        </div>
+    </div>
+

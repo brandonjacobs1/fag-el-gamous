@@ -16,7 +16,6 @@ namespace fag_el_gamous.Models
         public string? Text { get; set; }
         public string? LocationString
         {
-
             get
             {
                 return $"{Squarenorthsouth}{Northsouth} {Squareeastwest}{Eastwest} {Area} #{BurialNumber}";
