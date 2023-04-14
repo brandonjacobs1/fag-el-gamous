@@ -11,46 +11,12 @@
     <title>@ViewData["Title"] - fag_el_gamous</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
-    <link rel="stylesheet" href="~/css/bootstrap4.css" />
+    <link rel="stylesheet" href="~/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/fag_el_gamous.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-darkblue border-bottom box-shadow mb-3" style="background-color: #0d6efd">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">fag_el_gamous</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Admin">Admin</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Model" asp-action="Model">Models</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Research" asp-action="Research">Research</a>
-                        </li>
-                        @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="BurialList" asp-action="Index">Burials</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </nav>*@
-
-
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark mynavbar">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Navbar</a>
@@ -89,62 +55,10 @@
 
                         </li>
                     </ul>
-                    <form class="d-flex">
                         <partial name="_LoginPartial" />
-                    </form>
                 </div>
             </div>
         </nav>
-
-
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mynavbar">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarColor02">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-
-                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">
-                                Home
-                                <span class="visually-hidden">(current)</span>
-                            </a>
-
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Admin">Admin</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Research" asp-action="Research">Research</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="BurialList" asp-action="Index">Burials</a>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Models</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" asp-area="" asp-controller="Model" asp-action="Supervised">Supervised</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Model" asp-action="Model">Unsupervised</a>
-                            </div>
-
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <partial name="_LoginPartial" />
-                    </form>
-                </div>
-            </div>
-        </nav>
-
-
-
-
     </header>
     <div class="container">
         <main role="main" class="pb-3">
