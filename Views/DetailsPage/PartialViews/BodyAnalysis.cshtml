@@ -1,0 +1,68 @@
+﻿@model BodyAnalysisChartViewModel
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Body Analysis</h5>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h5 class="card-title">Body Analysis</h5>*@
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Date of examination: </strong>@Model.Dateofexamination</li>
+                            <li class="list-group-item"><strong>Preservation index: </strong>@Model.Preservationindex</li>
+                            <li class="list-group-item"><strong>Hair color: </strong>@Model.Haircolor</li>
+                            <li class="list-group-item"><strong>Observations: </strong>@Model.Observations</li>
+                            <li class="list-group-item"><strong>Robust: </strong>@Model.Robust</li>
+                            <li class="list-group-item"><strong>Supraorbital ridges: </strong>@Model.Supraorbitalridges</li>
+                            <li class="list-group-item"><strong>Orbit edge: </strong>@Model.Orbitedge</li>
+                            <li class="list-group-item"><strong>Parietal bossing: </strong>@Model.Parietalbossing</li>
+                            <li class="list-group-item"><strong>Gonion: </strong>@Model.Gonion</li>
+                            <li class="list-group-item"><strong>Nuchal crest: </strong>@Model.Nuchalcrest</li>
+                            <li class="list-group-item"><strong>Zygomatic crest: </strong>@Model.Zygomaticcrest</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h5 class="card-title">Attributes 12-22</h5>*@
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Sphenooccipital synchondrosis: </strong>@Model.Sphenooccipitalsynchrondrosis</li>
+                            <li class="list-group-item"><strong>Lamboid suture: </strong>@Model.Lamboidsuture</li>
+                            <li class="list-group-item"><strong>Squamosal suture: </strong>@Model.Squamossuture</li>
+                            <li class="list-group-item"><strong>Tooth attrition: </strong>@Model.Toothattrition</li>
+                            <li class="list-group-item"><strong>Tooth eruption: </strong>@Model.Toothattrition</li>
+                            <li class="list-group-item"><strong>Tooth eruption age estimate: </strong>@Model.Tootheruptionageestimate</li>
+                            <li class="list-group-item"><strong>Ventral arc: </strong>@Model.Ventralarc</li>
+                            <li class="list-group-item"><strong>Subpubic angle: </strong>@Model.Subpubicangle</li>
+                            <li class="list-group-item"><strong>Sciatic notch: </strong>@Model.Sciaticnotch</li>
+                            <li class="list-group-item"><strong>Pubic bone: </strong>@Model.Pubicbone</li>
+                            <li class="list-group-item"><strong>Preauricular sulcus: </strong>@Model.Preauricularsulcus</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        @*<h5 class="card-title">Attributes 12-22</h5>*@
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Medial IpRamus: </strong>@Model.MedialIpRamus</li>
+                            <li class="list-group-item"><strong>Dorsal Pitting: </strong>@Model.Dorsalpitting</li>
+                            <li class="list-group-item"><strong>Femur: </strong>@Model.Femur</li>
+                            <li class="list-group-item"><strong>Humerus: </strong>@Model.Humerus</li>
+                            <li class="list-group-item"><strong>Femur Head Diameter: </strong>@Model.Femurheaddiameter</li>
+                            <li class="list-group-item"><strong>Humerus Head Diameter: </strong>@Model.Humerusheaddiameter</li>
+                            <li class="list-group-item"><strong>Femur Length: </strong>@Model.Femurlength</li>
+                            <li class="list-group-item"><strong>Humerus Length: </strong>@Model.Humeruslength</li>
+                            <li class="list-group-item"><strong>Estimate Stature: </strong>@Model.Estimatestature</li>
+                            <li class="list-group-item"><strong>Caries Periodontal Disease: </strong>@Model.CariesPeriodontalDisease</li>
+                            <li class="list-group-item"><strong>Notes: </strong>@Model.Notes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

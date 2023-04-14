@@ -6,15 +6,16 @@
 @model List<UserRolesView>
 
 <div class="text-center">
-    <p>Admin Page</p>
+    <h1>Admin Page</h1>
 
     <div class="row">
         <div class="col-2">
-                <a class="btn btn-primary" asp-controller="Admin" asp-action="ManageRoles">Manage Roles</a>
+                <a class="btn btn-success" asp-controller="Admin" asp-action="ManageRoles">Manage Roles</a>
             <br />
-                <a class="btn btn-primary">Manage Users</a>
+            <br />
+                <a class="btn btn-info" asp-controller="Admin" asp-action="ManageUsers">Manage Users</a>
         </div>
-        <div class="col-6">
+        <div class="col-10">
             <table class="table table-striped">
                     <thead>
                         <tr>
@@ -42,14 +43,14 @@
             </table>
         </div>
 
-        <div class="col-4">
+        @*<div class="col-4">
             <h3>Add a new role</h3>
             <form asp-controller="Admin" asp-action="AddRole" method="post">
                 <label asp-for="@Model.FirstOrDefault().NewRole">New role name:</label>
                 <input asp-for="@Model.FirstOrDefault().NewRole" />
                 <button type="submit">Submit</button>
             </form>
-        </div>
+        </div>*@
     </div>
    
 

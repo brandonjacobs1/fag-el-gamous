@@ -46,6 +46,28 @@ namespace fag_el_gamous.Controllers
             return View(viewModel); 
         }
 
+        public async Task<IActionResult> ManageUsers()
+        {
+            //var users = _userManager.Users.ToList();
+            var users = _userManager.Users.ToList();
+            //var viewModel = new List<UserRolesView>();
+
+            //foreach (var user in users)
+            //{
+            //    var userRoles = await _userManager.GetRolesAsync(user);
+            //    var userRoleViewModel = new UserRolesView
+            //    {
+            //        User = user,
+            //        Roles = userRoles
+            //    };
+            //    viewModel.Add(userRoleViewModel);
+            var viewModel = new UserRolesView
+            {
+                ListUsers = users
+            };
+
+            return View(viewModel);
+        }
 
         public async Task<IActionResult> ManageRoles()
         {
@@ -81,14 +103,15 @@ namespace fag_el_gamous.Controllers
 
             var user = await _userManager.FindByIdAsync(id);
             var roles = _roleManager.Roles.ToList();
-            var userRoles = await _userManager.GetRolesAsync(user); 
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var newRoles = roles.Where(role => !userRoles.Contains(role.Name)).ToList();
             
 
             var viewModel = new UserRolesView
             {
                 Roles = userRoles,
                 User = user,
-                ListRoles = roles
+                ListRoles = newRoles
             };
 
             if (user == null)
@@ -145,12 +168,111 @@ namespace fag_el_gamous.Controllers
                 SingleRole = role
             };
 
+            return View(viewModel);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmUserDelete(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+            //var role = _roleManager.FindByNameAsync(roleName);
+            //var userRoles = await _userManager.GetRolesAsync(user); // Get the roles for the current user
+
+
+            var viewModel = new UserRolesView
+            {
+                User = user
+            };
+
+            return View(viewModel);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+
+            //var role = _roleManager.FindByNameAsync(roleName);
+            //var userRoles = await _userManager.GetRolesAsync(user); // Get the roles for the current user
+
+
+            var viewModel = new UserRolesView
+            {
+                User = user
+            };
+
             //if (user == null)
             //{
             //    return NotFound();
             //}
             return View(viewModel);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(string id, string newEmail)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+
+            var token = await _userManager.GenerateChangeEmailTokenAsync(user, newEmail);
+
+            await _userManager.ChangeEmailAsync(user, newEmail, token);
+
+            //var role = _roleManager.FindByNameAsync(roleName);
+            //var userRoles = await _userManager.GetRolesAsync(user); // Get the roles for the current user
+
+
+            var viewModel = new UserRolesView
+            {
+                User = user
+            };
+
+            
+            return RedirectToAction("ManageUsers");
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            if (id != null)
+            {
+                //var role = new IdentityRole
+                //{
+                //    Name = model.
+                //};
+                var user = await _userManager.FindByIdAsync(id);
+                var result = await _userManager.DeleteAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ManageUsers");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "failed to add role");
+                }
+            }
+
+            return RedirectToAction("ManageUsers");
+        }
+
 
 
 

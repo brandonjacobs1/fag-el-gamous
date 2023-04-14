@@ -4,3 +4,96 @@
 @{
 }
 
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model UserRolesView
+
+<div class="text-center">
+    <p>Admin Page</p>
+
+    <div class="row">
+        @*<div class="col-2">
+                    <button class="btn btn-primary">Manage Roles</button>
+                <br />
+                    <button class="btn btn-primary">Manage Users</button>
+            </div>*@
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>UserId</td>
+                        <td>User</td>
+                        <td>Email Confirmed</td>
+                        <td>Two-Factor Enabled</td>
+                        <td>Actions</td>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var u in Model.ListUsers)
+                    {
+                        <tr>
+                            <td>@u.Id</td>
+                            <td>@u.Email</td>
+                            <td>@u.EmailConfirmed</td>
+                            <td>@u.TwoFactorEnabled</td>
+                            <td>
+                                <a asp-action="ConfirmUserDelete" asp-route-id="@u.Id">Delete</a>
+                                <br />
+                                <a asp-action="EditUser" asp-route-id="@u.Id">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @*<div class="col-6">
+            <h3>Add a new role</h3>
+            <form asp-controller="Admin" asp-action="AddRole" method="post">
+                <label asp-for="NewRole">New role name:</label>
+                <input asp-for="NewRole" />
+                <button type="submit">Submit</button>
+            </form>
+        </div>*@
+    </div>
+
+    <a asp-controller="Admin" asp-action="Admin">Back to list</a>
+
+
+    @*<h3>Add a new role</h3>
+        <form asp-controller="Admin" asp-action="AddRole" method="post">
+                <label asp-for="NewRole">New role name:</label>
+                <input asp-for="NewRole" />
+                <button type="submit">Submit</button>
+        </form>*@
+
+    @*<h3>Assign user to role</h3>
+
+        <form asp-controller="Admin" asp-action="AddRoleToUser" method="post">
+            <label for="userId">Users:</label>
+            <select id="userId" name="userId">
+                @foreach (var user in Model.Users)
+                {
+                    <option value="@user.Id">@user.Email</option>
+                }
+            </select>
+
+            <label for="roleName">Roles:</label>
+            <select id="roleName" name="roleName">
+                @foreach (var role in Model.Roles)
+                {
+                    <option value="@role.Name">@role.Name</option>
+                }
+            </select>*@
+
+    @*<button type="submit">submit</button>
+
+        </form>*@
+
+
+</div>
+

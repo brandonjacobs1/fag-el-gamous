@@ -1,75 +1,92 @@
 ﻿@model userSearch
 
-    <form method="post" asp-action="Index" id="search">
-        <label>@Html.DisplayNameFor(model => model.locationString)</label>
-        <input asp-for="@Model.locationString" />
-
-        <label>@Html.DisplayNameFor(model => model.ageAtDeath)</label>
-        <select asp-for="@Model.ageAtDeath">
-            <option value="" disabled selected>Filter</option>
-            <option>N</option>
-            <option>I</option>
-            <option>C</option>
-            <option>A</option>
+<form method="post" name="search">
+    <div class="form-group">
+        <label asp-for="LocationString">Location String</label>
+        <input asp-for="LocationString" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Sex">Sex</label>
+        <select asp-for="Sex" class="form-control">
+            <option value="">--Select--</option>
+            @foreach (var sex in Model.SexList)
+            {
+                <option value="@sex">@sex</option>
+            }
         </select>
-
-        <label>@Html.DisplayNameFor(model => model.minDepth)</label>
-        <input asp-for="@Model.minDepth" />
-
-        <label>@Html.DisplayNameFor(model => model.maxDepth)</label>
-        <input asp-for="@Model.maxDepth" />
-
-        <label>@Html.DisplayNameFor(model => model.hairColor)</label>
-        <select asp-for="@Model.hairColor">
-            <option value="" disabled selected>Filter</option>
-            <option>Y</option>
-            <option>B</option>
-            <option>R</option>
-            <option>D</option>
-            <option>A</option>
-            <option>K</option>
-            <option>T</option>
-
+    </div>
+    <div class="form-group">
+        <label asp-for="MinDepth">Min Depth</label>
+        <input asp-for="MinDepth" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="MaxDepth">Max Depth</label>
+        <input asp-for="MaxDepth" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="AgeAtDeath">Age At Death</label>
+        <input asp-for="AgeAtDeath" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="HairColor">Hair Color</label>
+        <input asp-for="HairColor" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="HeadDirection">Head Direction</label>
+        <select asp-for="HeadDirection" class="form-control">
+            <option value="">--Select--</option>
+            @foreach (var headDirection in Model.HeadDirectionList)
+            {
+                <option value="@headDirection">@headDirection</option>
+            }
         </select>
-
-        <label>@Html.DisplayNameFor(model => model.sex)</label>
-        <select asp-for="@Model.sex">
-            <option value="" disabled selected>Filter</option>
-            <option>M</option>
-            <option>F</option>
-        </select>
-
-        <label>@Html.DisplayNameFor(model => model.headDirection)</label>
-        <select asp-for="@Model.headDirection">
-            <option value="" disabled selected>Filter</option>
-            <option>E</option>
-            <option>I</option>
-            <option>W</option>
-            <option>N LL</option>
-        </select>
-
-        <label>@Html.DisplayNameFor(model => model.faceBundles)</label>
-        <select asp-for="@Model.faceBundles">
-            <option value="" disabled selected>Filter</option>
-            <option>T</option>
-            <option>F</option>
-        </select>
-
-        <label>@Html.DisplayNameFor(model => model.textileFunction)</label>
-        <input asp-for="@Model.textileFunction" />
-
-        <label>@Html.DisplayNameFor(model => model.textileStructure)</label>
-        <input asp-for="@Model.textileStructure" />
-
-        <label>@Html.DisplayNameFor(model => model.minEstimateStature)</label>
-        <input asp-for="@Model.minEstimateStature" />
-
-        <label>@Html.DisplayNameFor(model => model.maxEstimateStature)</label>
-        <input asp-for="@Model.maxEstimateStature" />
-
-        <label>@Html.DisplayNameFor(model => model.text)</label>
-        <input asp-for="@Model.text" />
-
-        <button type="submit">Search</button>
-    </form>
-    <a asp-action="Index">Back to Full List</a>
+    </div>
+    <div class="form-group">
+        <label asp-for="TextileColor">Textile Color</label>
+        <input asp-for="TextileColor" class="form-control" />
+        @*<select asp-for="TextileColor" class="form-control">
+            <option value="">--Select--</option>
+            @foreach (var color in Model.TextileColorList)
+            {
+                <option value="@color.Value">@color.Value</option>
+            }
+        </select>*@
+        @*<select asp-for="TextileColor" asp-items="@Model.TextileColorList" class="form-control" multiple size="1">
+        </select>*@
+    </div>
+    <div class="form-group">
+        <label asp-for="TextileStructure">Textile Structure</label>
+        <input asp-for="TextileStructure" class="form-control" />
+        @*<select asp-for="TextileStructure" class="form-control">
+            <option value="">--Select--</option>
+            @foreach (var structure in Model.TextileStructureList)
+            {
+                <option value="@structure.Value">@structure.Value</option>
+            }
+        </select>*@
+    </div>
+    <div class="form-group">
+        <label asp-for="TextileFunction">Textile Function</label>
+        <input asp-for="TextileFunction" class="form-control" />
+        @*<select asp-for="TextileFunction" class="form-control">
+            <option value="">--Select--</option>
+            @foreach (var function in Model.TextileFunctionList)
+            {
+                <option value="@function.Value">@function.Value</option>
+            }
+        </select>*@
+    </div>
+    <div class="form-group">
+        <label asp-for="FaceBundles">Face Bundles</label>
+        <input asp-for="FaceBundles" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Text">Text</label>
+        <input asp-for="Text" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="FieldBookExcavationYear">Field Book Excavation Year</label>
+        <input asp-for="FieldBookExcavationYear" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>

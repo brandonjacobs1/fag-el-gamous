@@ -4,26 +4,51 @@
     var consentFeatureFlag = Context.Features.Get<ITrackingConsentFeature>();
     var showBannerFlag = !consentFeatureFlag?.CanTrack ?? false;
     var cookieStr = consentFeatureFlag?.CreateConsentCookie();
+
 }
 
 @if (showBannerFlag)
 {
+    <div id="cookieOverlay"></div>
     <div id="cookieConsentdiv">
         <h3 class="display-6">Cookie Policy</h3>
-        <p>PLEASE ACCEPT OUR <a  asp-area="" asp-controller="Home" asp-action="CookiePolicy">COOKIE POLICY</a>.   </p>
+        <p>PLEASE ACCEPT OUR <a class="cookie-link" asp-area="" asp-controller="Home" asp-action="CookiePolicy">COOKIE POLICY</a>.   </p>
         <button type="button" data-cookie-string="@cookieStr">
             <span aria-hidden="true">Accept</span>
         </button>
     </div>
     <script type="text/javascript">
-
-        $(document).ready(function () {
+        @*$(document).ready(function () {
             console.log("jQuery loaded.");
             $("#cookieConsentdiv button[data-cookie-string]").bind("click", function () {
-            
                 document.cookie = $("#cookieConsentdiv button").attr("data-cookie-string");
                 $("#cookieConsentdiv").hide();
+                $("#cookieOverlay").hide();
             });
-        });
+            $("#cookieOverlay").click(function () {
+                // Do nothing when the overlay is clicked
+            });
+        });*@
+
+            $(document).ready(function () {
+                console.log("jQuery loaded.");
+
+                // Check if the current URL contains "CookiePolicy"
+                if (window.location.href.indexOf("CookiePolicy") > -1) {
+                    $("#cookieOverlay").addClass("no-cookie-banner");
+                }
+
+                $("#cookieConsentdiv button[data-cookie-string]").bind("click", function () {
+                    document.cookie = $("#cookieConsentdiv button").attr("data-cookie-string");
+                    $("#cookieConsentdiv").hide();
+                    $("#cookieOverlay").hide();
+                    $("body").removeClass("no-cookie-banner");
+                });
+
+                $("#cookieOverlay").click(function () {
+                    // Do nothing when the overlay is clicked
+                });
+            });
     </script>
+
 }

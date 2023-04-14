@@ -1,126 +1,76 @@
-@model BurialListViewModel
-@{
-
-
-    //ViewData["Title"] = "Index";
-}
+@model filterViewModel
 
 <h1>Index</h1>
 <br />
-<partial name="searchPartialView" model=@Model.userSearch />
+<partial name="searchPartialView" model=@Model.Search />
 <br />
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<button asp-action="Index">Return to Full List</button>
+
+<table>
     <thead>
         <tr>
-
-            <th>
-                <button form="search" type="submit" class="btn btn-link" style="color: blue; text-decoration: underline; padding: 0; border: none; background-color: transparent;" asp-action="Index" asp-route-sortOrder="@ViewData["locationParam"]">Location</button>
-            </th>
-            <th>
-                ID
-            </th>
-            <th>
-                Sex
-            </th>
-            <th>
-                Head Direction
-            </th>
-            <th>
-                Depth
-            </th>
-            <th>
-                Hair Color
-            </th>
-            <th>
-                Age at Death
-            </th>
-            <th>
-                Textile Structure
-            </th>
-            <th>
-                Field Book Excavation Year
-            </th>
-            <th>
-                Face Bundles
-            </th>
-            <th>
-                Textile Function
-            </th>
-
-            <th>
-                Robust
-            </th>
-            <th>
-                Parietal Blossom
-            </th>
-            <th>
-                Estimate Stature
-            </th>
-            <th>
-                Text
-            </th>
+            <th>Location</th>
+            <th>ageAtDeath</th>
+            <th>depth</th>
+            <th>hairColor</th>
+            <th>headDirection</th>
+            <th>faceBundles</th>
+            <th>fieldBookExcavationYear</th>
+            <th>sex</th>
+            <th>text</th>
+            <th>Colors</th>
+            <th>Structures</th>
+            <th>Functions</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-
-        @foreach (var item in Model.displayBurial)
+        @foreach (var burial in Model.displayBurial)
         {
             <tr>
+                <td>@burial.LocationString</td>
+                <td>@burial.AgeAtDeath</td>
+                <td>@burial.Depth</td>
+                <td>@burial.HairColor</td>
+                <td>@burial.HeadDirection</td>
+                <td>@burial.FaceBundles</td>
+                <td>@burial.FieldBookExcavationYear</td>
+                <td>@burial.Sex</td>
+                <td>@burial.Text</td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.locationString)
+                    @foreach (var color in burial.textileColor)
+                    {
+                        <span>@color.Color.Value</span>
+                        if (color != burial.textileColor.Last())
+                        {
+                            <span>, </span>
+                        }
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    @foreach (var structure in burial.textileStructure)
+                    {
+                        <span>@structure.Structure.Value</span>
+                        if (structure != burial.textileStructure.Last())
+                        {
+                            <span>, </span>
+                        }
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.sex)
+                    @foreach (var function in burial.textileFunction)
+                    {
+                        <span>@function.Textilefunction.Value</span>
+                        if (function != burial.textileFunction.Last())
+                        {
+                            <span>, </span>
+                        }
+                    }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.headDirection)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.depth)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.hairColor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ageAtDeath)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.textileStructure)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fieldBookExcavationYear)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.faceBundles)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.textileFunction)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Robust)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ParietalBlossing)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.estimateStature)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.text)
-                </td>
-
-
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@burial.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@burial.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@burial.Id">Delete</a>
                 </td>
             </tr>
         }
@@ -130,24 +80,188 @@
     var prevDisabled = !Model.displayBurial.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.displayBurial.HasNextPage ? "disabled" : "";
 }
-
-<button asp-action="Index"
-   
-   asp-route-pageNumber="@(Model.displayBurial.PageIndex - 1)"
-   asp-route-sortOrder="@ViewData["CurrentSort"]"
-   form="search"
-   type="submit"
-   class="btn btn-default @prevDisabled">
+<button asp-controller="BurialList"
+        asp-action="Index"
+        asp-route-pageNumber="@(Model.displayBurial.PageIndex - 1)"
+        asp-route-sortOrder="@ViewData["CurrentSort"]"
+        form="search"
+        type="submit"
+        class="btn btn-default @prevDisabled">
     Previous
 </button>
-<button asp-action="Index"
-   
-   asp-route-pageNumber="@(Model.displayBurial.PageIndex + 1)"
-   asp-route-sortOrder="@ViewData["CurrentSort"]"
-   form="search"
-   type="submit"
-   class="btn btn-default @nextDisabled">
+<button asp-controller="BurialList"
+        asp-action="Index"
+        asp-route-pageNumber="@(Model.displayBurial.PageIndex + 1)"
+        asp-route-sortOrder="@ViewData["CurrentSort"]"
+        form="search"
+        type="submit"
+        class="btn btn-default @nextDisabled">
     Next
 </button>
 <p>@Model.displayBurial.PageIndex</p>
 <p>@Model.displayBurial.TotalPages</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model BurialListViewModel
+    @{
+
+
+        //ViewData["Title"] = "Index";
+    }
+
+    <h1>Index</h1>
+    <br />
+    <partial name="searchPartialView" model=@Model.userSearch />
+    <br />
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>
+                    <button form="search" type="submit" class="btn btn-link" style="color: blue; text-decoration: underline; padding: 0; border: none; background-color: transparent;" asp-action="Index" asp-route-sortOrder="@ViewData["locationParam"]">Location</button>
+                </th>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Sex
+                </th>
+                <th>
+                    Head Direction
+                </th>
+                <th>
+                    Depth
+                </th>
+                <th>
+                    Hair Color
+                </th>
+                <th>
+                    Age at Death
+                </th>
+                <th>
+                    Textile Structure
+                </th>
+                <th>
+                    Field Book Excavation Year
+                </th>
+                <th>
+                    Face Bundles
+                </th>
+                <th>
+                    Textile Function
+                </th>
+                <th>
+                    Estimate Stature
+                </th>
+                <th>
+                    Text
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.displayBurial)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.locationString)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sex)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.headDirection)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.depth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.hairColor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ageAtDeath)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.textileStructure)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fieldBookExcavationYear)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.faceBundles)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.textileFunction)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.estimateStature)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.text)
+                    </td>
+
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @{
+        var prevDisabled = !Model.displayBurial.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.displayBurial.HasNextPage ? "disabled" : "";
+    }
+
+    <button asp-action="Index"
+
+       asp-route-pageNumber="@(Model.displayBurial.PageIndex - 1)"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       form="search"
+       type="submit"
+       class="btn btn-default @prevDisabled">
+        Previous
+    </button>
+    <button asp-action="Index"
+
+       asp-route-pageNumber="@(Model.displayBurial.PageIndex + 1)"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       form="search"
+       type="submit"
+       class="btn btn-default @nextDisabled">
+        Next
+    </button>
+    <p>@Model.displayBurial.PageIndex</p>
+    <p>@Model.displayBurial.TotalPages</p>*@

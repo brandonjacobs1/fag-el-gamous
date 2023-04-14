@@ -2,64 +2,38 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+	ViewData["Title"] = "Cookie Policy";
 }
-<head>
-	<title>Cookie Policy</title>
-	<style>
-		body {
-			font-family: Arial, sans-serif;
-			font-size: 16px;
-			line-height: 1.5;
-			margin: 0;
-			padding: 0;
+
+<head> <style>
+	
+
+body {
+    backdrop-filter: none !important;
+}
+
+no-cookie-overlay {
+			backdrop-filter: none !important;
+		}
+#no-cookie-overlay{
+			backdrop-filter: none !important;
 		}
 
-		header {
-			background-color: #f5f5f5;
-			padding: 20px;
-			text-align: center;
+#cookieOverlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(0, 0, 0, 0.5); /* Set the overlay color and opacity */
+			z-index: 999; /* Set the z-index higher than the cookie banner */
+			backdrop-filter: none !important;/* Add a blur effect */
 		}
 
-		h1 {
-			font-size: 36px;
-			margin-bottom: 20px;
-		}
-
-		main {
-			margin: 20px auto;
-			max-width: 800px;
-			padding: 20px;
-		}
-
-		p {
-			margin-bottom: 20px;
-		}
-
-		ul {
-			margin-bottom: 20px;
-			padding-left: 20px;
-		}
-
-		li {
-			margin-bottom: 10px;
-		}
-
-		button {
-			background-color: #007bff;
-			border: none;
-			color: #fff;
-			cursor: pointer;
-			font-size: 16px;
-			padding: 10px 20px;
-			transition: background-color 0.2s ease;
-		}
-
-			button:hover {
-				background-color: #0069d9;
-			}
-	</style>
+    </style>
+		
 </head>
-
+<div class="no-cookie-overlay policy" id="policy">
 	<header>
 		<h1>Cookie Policy</h1>
 	</header>
@@ -78,4 +52,6 @@
 		<p>You can set your browser to block or alert you about these cookies, but some parts of the site may not work then. These cookies do not store any personally identifiable information.</p>
 
 	</main>
+
+</div>
 

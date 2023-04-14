@@ -6,8 +6,12 @@
 
 <h1>Details</h1>
 <br />
-<partial name="PartialViews/Burialmain" model="@Model.BurialmainSingle.Burialmain" />
-<br />
+@if (Model.BurialmainSingle.Burialmain != null)
+{
+    <partial name="PartialViews/Burialmain" model="@Model.BurialmainSingle.Burialmain" />
+    <br />
+}
+
 <partial name="PartialViews/Textiles" model="@Model.BurialmainTextile" />
 <br />
 
@@ -31,5 +35,13 @@
 
 <partial name="PartialViews/Yarnmanipulation" model="@Model.YarnmanipulationTextile" />
 <br />
-<a asp-controller="Buriallist" asp-action="Index">Back to List</a>
+
+<partial name="PartialViews/Photodata" model="@Model.PhotodataTextile" />
+<br />
+@if (Model.BodyAnalysisViewModel != null)
+    {
+    <partial name="PartialViews/BodyAnalysis" model="@Model.BodyAnalysisViewModel" />
+    <br />
+    }
+    <a asp-controller="Buriallist" asp-action="Index">Back to List</a>
 
